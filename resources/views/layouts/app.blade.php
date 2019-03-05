@@ -30,10 +30,12 @@
         <style type="text/css">
             @yield('template_fastload_css')
 
+            @if (Auth::User() && (Auth::User()->profile))
             .user-avatar-nav {
                 background: url('{{ Auth::User()->profile->avatar }}') 50% 50% no-repeat;
                 background-size: auto 100%;
             }
+            @endif
 
         </style>
 

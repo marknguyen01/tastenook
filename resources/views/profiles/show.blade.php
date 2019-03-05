@@ -94,24 +94,6 @@
 										{{ $user->profile->bio }}
 									</dd>
 								@endif
-
-								@if ($user->profile->twitter_username)
-									<dt>
-										{{ trans('profile.showProfileTwitterUsername') }}
-									</dt>
-									<dd>
-										{!! HTML::link('https://twitter.com/'.$user->profile->twitter_username, $user->profile->twitter_username, array('class' => 'twitter-link', 'target' => '_blank')) !!}
-									</dd>
-								@endif
-
-								@if ($user->profile->github_username)
-									<dt>
-										{{ trans('profile.showProfileGitHubUsername') }}
-									</dt>
-									<dd>
-										{!! HTML::link('https://github.com/'.$user->profile->github_username, $user->profile->github_username, array('class' => 'github-link', 'target' => '_blank')) !!}
-									</dd>
-								@endif
 							@endif
 
 						</dl>
