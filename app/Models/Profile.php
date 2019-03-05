@@ -35,7 +35,6 @@ class Profile extends Model
         'github_username',
         'user_profile_bg',
         'avatar',
-        'avatar_status',
     ];
 
     protected $casts = [
