@@ -30,18 +30,19 @@ body {
 }
 
 #intro .container > .row #navbar #brand-name {
-  color: #fff;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
 #intro .container > .row #navbar #brand-name h2 {
-  position: absolute;
-  top: 25%;
+  display: inline-block;
+  margin: 0;
+  vertical-align: text-top;
 }
 
 #intro .container > .row #navbar #user-info a.nav-link {
   font-weight: 600;
-  color: #fff !important;
+  color: #ffffff !important;
   display: inline-block !important;
 }
 
@@ -52,7 +53,7 @@ body {
 #intro .container > .row #navbar #user-info img {
   width: 48px;
   height: 48px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 50%;
 }
 
@@ -60,7 +61,34 @@ body {
   margin-top: -3rem;
 }
 
-#intro .container > .row #search input {
-  width: 100%;
+#intro .container > .row #search input.form-control {
+  border: none;
+}
+
+#intro .container > .row #search input.form-control:first-child {
+  width: 30vw;
+}
+
+#intro .container > .row #search input.form-control:hover,
+#intro .container > .row #search input.form-control:focus {
+  outline: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+#intro .container > .row #search #search-separator {
+  background-color: #ffffff;
+}
+
+#intro .container > .row #search #search-separator span {
+  background-color: #808187;
+  width: 2px;
+  margin: 8px 0;
+}
+
+#intro .container > .row #search .btn {
+  background-color: #e9342c;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }
 
