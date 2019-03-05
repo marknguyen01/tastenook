@@ -10,7 +10,6 @@
 
     <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ config('app.name', Lang::get('titles.app')) }}</title>
     <meta name="description" content="">
-    <meta name="author" content="Jeremy Kenedy">
     <link rel="shortcut icon" href="/favicon.ico">
 
     {{-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --}}
@@ -61,8 +60,8 @@
                         <div class="col-8 d-flex" id="user-info">
                         @guest
                             <span class="ml-auto">
-                                <a href="{{ route('login') }}" class="mr-3">{{ trans('titles.login') }}</a>
-                                <a href="{{ route('register') }}">{{ trans('titles.register') }}</a>
+                                <a href="{{ route('login') }}" class="nav-link mr-3">{{ trans('titles.login') }}</a>
+                                <a href="{{ route('register') }}" class="nav-link">{{ trans('titles.register') }}</a>
                             </span>
                         @else
                             <div class="nav-item dropdown ml-auto">

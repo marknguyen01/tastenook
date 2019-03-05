@@ -39,12 +39,13 @@ body {
   top: 25%;
 }
 
-#intro .container > .row #navbar #user-info a#navbarDropdown {
+#intro .container > .row #navbar #user-info a.nav-link {
   font-weight: 600;
   color: #fff !important;
+  display: inline-block !important;
 }
 
-#intro .container > .row #navbar #user-info a#navbarDropdown:hover {
+#intro .container > .row #navbar #user-info a.nav-link:hover {
   text-decoration: none;
 }
 

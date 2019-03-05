@@ -37,9 +37,10 @@ body {
                     }
                 }
                 #user-info {
-                    a#navbarDropdown {
+                    a.nav-link {
                         font-weight: 600;
                         color: $white !important;
+                        display: inline-block !important;
                         &:hover {
                             text-decoration: none;
                         }
