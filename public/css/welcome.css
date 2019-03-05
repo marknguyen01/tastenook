@@ -1,0 +1,65 @@
+body {
+  background-color: #1D2C3f;
+}
+
+#intro {
+  width: 100%;
+  height: 55vh;
+  position: relative;
+}
+
+#intro::after {
+  content: "";
+  background-image: url("/images/landing.jpg");
+  background-size: cover;
+  background-position: center 55%;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+#intro .container > .row {
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
+}
+
+#intro .container > .row #navbar #brand-name {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+#intro .container > .row #navbar #brand-name h2 {
+  position: absolute;
+  top: 25%;
+}
+
+#intro .container > .row #navbar #user-info a#navbarDropdown {
+  font-weight: 600;
+  color: #fff !important;
+}
+
+#intro .container > .row #navbar #user-info a#navbarDropdown:hover {
+  text-decoration: none;
+}
+
+#intro .container > .row #navbar #user-info img {
+  width: 48px;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+#intro .container > .row #search {
+  margin-top: -3rem;
+}
+
+#intro .container > .row #search input {
+  width: 100%;
+}
+
