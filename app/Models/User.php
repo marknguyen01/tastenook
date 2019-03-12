@@ -112,4 +112,8 @@ class User extends Authenticatable
     {
         return $this->profiles()->detach($profile);
     }
+
+    public function businesses() {
+      return $this->hasMany('App\Models\Business');
+    }
 }
