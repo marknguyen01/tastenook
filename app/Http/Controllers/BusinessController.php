@@ -8,6 +8,13 @@ use App\Models\Business;
 class BusinessController extends Controller
 {
     public function show($slug) {
-      echo Business::where('slug', $slug)->get();
+      $business = Business::where('slug', $slug)->first();
+
+      if($business) {
+        echo $business;
+      }
+      else {
+        abort(404);
+      }
     }
 }
