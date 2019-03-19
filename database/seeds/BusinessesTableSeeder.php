@@ -14,13 +14,14 @@ class BusinessesTableSeeder extends Seeder
     {
       $name = "McDonald's";
       $slug = Str::slug($name . hexdec(uniqid()), '-');
-      Business::create([
+      $business = Business::create([
         'name'      =>  $name,
         'slug'      =>  $slug,
         'address'   =>  '9320 Steele Creek Rd, Charlotte, NC 28273'
         'city'      =>  'Charlotte',
         'state'     =>  'NC',
         'zip_code'  =>  '28273',
-      ])
+      ]);
+      $business->save();
     }
 }
