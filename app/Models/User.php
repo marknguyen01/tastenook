@@ -114,6 +114,6 @@ class User extends Authenticatable
     }
 
     public function businesses() {
-      return $this->hasMany('App\Models\Business');
+      return $this->belongsToMany('App\Models\Business', 'business_user');
     }
 }
