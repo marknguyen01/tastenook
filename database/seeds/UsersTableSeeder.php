@@ -3,6 +3,7 @@
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Models\Role;
 
 class UsersTableSeeder extends Seeder
@@ -24,7 +25,7 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', $seededAdminEmail)->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => $faker->userName,
+                'name'                           => Str::slug($faker->firstName . ($faker->lastName)[0] . uniqid(), '-'),
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
                 'email'                          => $seededAdminEmail,
@@ -48,7 +49,7 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', 'user@user.com')->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => $faker->userName,
+                'name'                           => Str::slug($faker->firstName . ($faker->lastName)[0] . uniqid(), '-'),
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
                 'email'                          => 'user@user.com',
