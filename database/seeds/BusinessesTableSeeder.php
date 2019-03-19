@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use App\Models\Business;
 
 class BusinessesTableSeeder extends Seeder
@@ -17,7 +18,7 @@ class BusinessesTableSeeder extends Seeder
       $business = Business::create([
         'name'      =>  $name,
         'slug'      =>  $slug,
-        'address'   =>  '9320 Steele Creek Rd, Charlotte, NC 28273'
+        'address'   =>  '9320 Steele Creek Rd, Charlotte, NC 28273',
         'city'      =>  'Charlotte',
         'state'     =>  'NC',
         'zip_code'  =>  '28273',
