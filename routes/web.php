@@ -126,4 +126,8 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('active-users', 'AdminDetailsController@activeUsers');
 });
 
+// Business route
+Route::get('b/{slug}', 'BusinessController@show');
+
+
 Route::redirect('/php', '/phpinfo', 301);
