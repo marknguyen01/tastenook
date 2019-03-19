@@ -37,6 +37,10 @@ class UsersTableSeeder extends Seeder
 
             $user->profile()->save($profile);
             $user->attachRole($adminRole);
+
+            // Add admin user to a business
+            $user->businesses()->sync([1]);
+
             $user->save();
         }
 
