@@ -14,7 +14,7 @@ class BusinessesTableSeeder extends Seeder
     public function run()
     {
       $name = "McDonald's";
-      $slug = Str::slug($name . hexdec(uniqid()), '-');
+      $slug = Str::slug($name . uniqid(), '-');
       $business = Business::create([
         'name'      =>  $name,
         'slug'      =>  $slug,
