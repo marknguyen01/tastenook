@@ -31,6 +31,7 @@ class CreateBusinessesTable extends Migration
             $table->integer('vote_count')->default(0);
             $table->integer('comment_count')->default(0);
             $table->integer('view_count')->default(0);
+            $table->integer('review_count')->default(0);
 
 
             $table->timestamps();

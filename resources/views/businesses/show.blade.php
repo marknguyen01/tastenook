@@ -40,7 +40,7 @@
             <ul>
                 <!-- TODO: Add logic to determine which nav link is .active -->
                 <li><a href="" class="active">Profile</a></li>
-                <li><a href="">Reviews (504)</a></li>
+                <li><a href="">Reviews ({{ $business->review_count }})</a></li>
                 <li><a href="">Menu</a></li>
                 <li><a href="">Locations</a></li>
                 <li><a href="">Gallery</a></li>
