@@ -1161,7 +1161,7 @@ input[type="submit"]:hover {
 }
 
 .profile {
-  margin-top: 70px;
+  margin-top: -1.5rem;
   height: auto;
 }
 

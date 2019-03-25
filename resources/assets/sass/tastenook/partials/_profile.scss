@@ -1,5 +1,5 @@
 .profile {
-    margin-top: 70px;
+    margin-top: -1.5rem;
     height: auto;
 
     &__cover {
@@ -35,7 +35,7 @@
         & img {
             height: 280px;
             width: 280px;
-            
+
             border-radius: 50%;
             border: 0.5rem solid $gray-scale--light;
         }
@@ -96,7 +96,7 @@
             font-size: 1.5rem;
         }
     }
-    
+
     &__nav {
         grid-area: nav;
         margin-top: -1rem;
@@ -115,7 +115,7 @@
                 height: 4rem;
                 width: 280px;
                 margin: 0.5rem 10px 0.5rem 0px;
-                
+
                 border-radius: 2rem;
                 background: $gray-scale--light;
                 box-shadow: $extra-light-shadow;
@@ -197,7 +197,7 @@
         &-item {
             &-group {
                 display: grid;
-                grid-template-columns: 2fr 1fr; 
+                grid-template-columns: 2fr 1fr;
             }
 
             &-name {
