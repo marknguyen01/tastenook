@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="search" class="col-12 align-self-start">
+                <div id="search" class="col-12 align-self-start mt-5">
                     <div class="input-group">
                           <input class="form-control py-2" type="search" placeholder="Looking for a restaurant?" name="search">
                           <div class="input-group-append" id="search-separator">

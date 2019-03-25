@@ -23,6 +23,17 @@ class BusinessesTableSeeder extends Seeder
         'state'     =>  'NC',
         'zip_code'  =>  '28273',
       ]);
+      // Generate placholder images
+      $op = 'public/images/businesses/faker_images/';
+      $dp = 'public/images/businesses/profile/' . $business->slug;
+
+      \File::cleanDirectory(base_path('public/images/businesses/profile'));
+
+      \File::makeDirectory(base_path($dp), 0777);
+      \File::copy(base_path($op . 'cover.jpg'), base_path($dp . '/cover.jpg'));
+      \File::copy(base_path($op . 'picture.jpg'), base_path($dp . '/picture.jpg'));
+      \File::copy(base_path($op . 'slide1.jpg'), base_path($dp . '/slide1.jpg'));
+      \File::copy(base_path($op . 'slide2.jpg'), base_path($dp . '/slide1.jpg'));
       $business->save();
     }
 }

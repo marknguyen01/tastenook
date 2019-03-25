@@ -39,6 +39,7 @@ Homestead.json
 /node_modules
 /public/hot
 /public/storage
+/public/images/businesses/profile/*
 /storage/*.key
 /vendor
 /storage/debugbar
@@ -50,4 +51,3 @@ packages/
 # Debug Files
 npm-debug.log
 yarn-error.log
-

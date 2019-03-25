@@ -9,11 +9,11 @@
 <div class="profile">
     <!-- TODO: Change image to company's cover picture. -->
     <!-- TODO: Add a default cover picture incase the company doesn't have one set. -->
-    <img src="{{ asset('images/businesses/profile/' . $business->slug . '/cover.png') }}" class="profile__cover">
+    <img src="{{ asset('images/businesses/profile/' . $business->slug . '/cover.jpg') }}" class="profile__cover">
     <div class="profile__content">
         <div class="profile__picture">
             <!-- TODO: Change image to company's profile picture. -->
-            <img src="../assets/McDonaldsPicture.jpg">
+            <img src="{{ asset('images/businesses/profile/' . $business->slug . '/picture.jpg') }}">
         </div>
         <div class="profile__title">
             <!-- TODO: Change text to the company's name. -->
