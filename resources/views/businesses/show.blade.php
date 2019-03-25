@@ -138,5 +138,9 @@
 
 
 @section('footer_scripts')
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/modal.js') }}"></script>
+<script src="{{ asset('js/tooltip.js') }}"></script>
+<script src="{{ asset('js/slick.min.js') }}"></script>
 
 @endsection
