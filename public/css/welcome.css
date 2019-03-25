@@ -113,3 +113,9 @@ body {
   color: #8bc058;
 }
 
+.businesses .business .business-info .business-stats .view-count,
+.businesses .business .business-info .business-stats .review-count,
+.businesses .business .business-info .business-stats .comment-count {
+  color: #7f8187;
+}
+

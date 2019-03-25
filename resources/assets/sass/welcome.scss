@@ -108,6 +108,11 @@ body {
             .business-status {
                 color: $green;
             }
+            .business-stats {
+                .view-count, .review-count, .comment-count {
+                    color: $text-accent-color;
+                }
+            }
         }
     }
 }
