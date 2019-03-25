@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
+
 class WelcomeController extends Controller
 {
     /**
@@ -11,6 +13,7 @@ class WelcomeController extends Controller
      */
     public function welcome()
     {
-        return view('welcome');
+        $newBusinesses = Business::orderBy('created_at')->limit(10)->get();
+        return view('welcome', ['newBusinesses' => $newBusinesses]);
     }
 }

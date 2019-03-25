@@ -106,6 +106,16 @@
         </div>
     </header>
     <div class="container">
+      <h2>New Business</h2>
+      <div class="row businesses">
+        @foreach ($newBusinesses as $business)
+          <div class="col-4 business">
+            <a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
+              {{ $business->name }}
+            </a>
+          </div>
+        @endforeach
+      </div>
     </div>
 
     </div>
