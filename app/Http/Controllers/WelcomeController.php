@@ -14,6 +14,8 @@ class WelcomeController extends Controller
     public function welcome()
     {
         $newBusinesses = Business::orderBy('created_at')->limit(10)->get();
-        return view('welcome', ['newBusinesses' => $newBusinesses]);
+        if($newBusinesses)
+            return view('welcome', ['newBusinesses' => $newBusinesses]);
+        else abort(500);
     }
 }

@@ -17,6 +17,7 @@ class CreateBusinessesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
+            $table->string('avatar')->default('/images/default_business.jpg');
 
             // Business address
             $table->string('address');

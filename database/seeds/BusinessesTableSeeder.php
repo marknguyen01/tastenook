@@ -22,6 +22,7 @@ class BusinessesTableSeeder extends Seeder
         'city'      =>  'Charlotte',
         'state'     =>  'NC',
         'zip_code'  =>  '28273',
+        'vote_avg'  => '3.4',
       ]);
       // Generate placholder images
       $op = 'public/images/businesses/faker_images/';
@@ -31,9 +32,12 @@ class BusinessesTableSeeder extends Seeder
 
       \File::makeDirectory(base_path($dp), 0777);
       \File::copy(base_path($op . 'cover.jpg'), base_path($dp . '/cover.jpg'));
-      \File::copy(base_path($op . 'picture.jpg'), base_path($dp . '/picture.jpg'));
+      \File::copy(base_path($op . 'avatar.jpg'), base_path($dp . '/avatar.jpg'));
       \File::copy(base_path($op . 'slide1.jpg'), base_path($dp . '/slide1.jpg'));
       \File::copy(base_path($op . 'slide2.jpg'), base_path($dp . '/slide1.jpg'));
+
+      $business->avatar = '/images/businesses/profile/' . $business->slug . '/avatar.jpg';
+
       $business->save();
     }
 }

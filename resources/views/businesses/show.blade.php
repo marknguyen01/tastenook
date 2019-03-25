@@ -13,7 +13,7 @@
     <div class="profile__content">
         <div class="profile__picture">
             <!-- TODO: Change image to company's profile picture. -->
-            <img src="{{ asset('images/businesses/profile/' . $business->slug . '/picture.jpg') }}">
+            <img src="{{ asset($business->avatar) }}">
         </div>
         <div class="profile__title">
             <!-- TODO: Change text to the company's name. -->
@@ -29,11 +29,11 @@
         <!-- START PROFILE NAV PARTIAL -->
         <nav class="profile__nav">
             <div class="profile__rating">
-                @for($i = 0; $i < round($business->avg_vote, 0); $i++)
+                @for($i = 0; $i < round($business->vote_avg, 0); $i++)
                     <i class="fas fa-star"></i>
                 @endfor
 
-                @for($i = 0; $i < (5 - round($business->avg_vote, 0)); $i++)
+                @for($i = 0; $i < (5 - round($business->vote_avg, 0)); $i++)
                     <i class="far fa-star"></i>
                 @endfor
             </div>
@@ -63,7 +63,7 @@
                 <!-- TODO: Set link to the company's profile page. -->
                 <a class="default-post__image" href="#">
                     <!-- TODO: Set image source to company's profile image. -->
-                    <img src="../assets/McDonaldsPicture.jpg">
+                    <img src="{{ asset($business->avatar)}}">
                 </a>
                 <div class="default-post__poster">
                     <!-- TODO: Set link below to company's profile page. -->

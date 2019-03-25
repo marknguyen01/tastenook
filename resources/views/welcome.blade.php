@@ -111,7 +111,8 @@
         @foreach ($newBusinesses as $business)
           <div class="col-4 business">
             <a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
-              {{ $business->name }}
+                <img src="{{ $business->avatar }}" alt="{{ $business->name }}">
+                {{ $business->name }}
             </a>
           </div>
         @endforeach
