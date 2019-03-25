@@ -1,0 +1,29 @@
+h1, h2 {
+    font-family: 'Lobster', cursive;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+.default-paragraph {
+    line-height: 150%;
+}
+
+.stylized-paragraph::first-letter {
+    font-size: 150%;
+    color: $main-color-1;
+
+    @supports(-webkit-background-clip: text) {
+        & {
+            background: $main-gradient;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+}

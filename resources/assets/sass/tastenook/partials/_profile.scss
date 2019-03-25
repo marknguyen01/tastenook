@@ -1,0 +1,267 @@
+.profile {
+    margin-top: 70px;
+    height: auto;
+
+    &__cover {
+        margin: -1rem 0rem 0rem;
+        width: 100%;
+        height: $half-wrapper-width;
+        border-bottom: 0.5rem solid $gray-scale--light;
+        box-shadow: $light-shadow;
+        z-index: -1;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 300px 700px;
+        grid-template-rows: repeat(3, 100px) 450px auto;
+        grid-template-areas:
+            "picture   .  "
+            "picture title"
+            "picture info"
+            "  nav   info"
+            "   .    info";
+
+        width: $wrapper-width;
+        margin: -205px auto 0;
+    }
+
+    &__picture {
+        grid-area: picture;
+
+        display: relative;
+        z-index: 1;
+
+        & img {
+            height: 280px;
+            width: 280px;
+            
+            border-radius: 50%;
+            border: 0.5rem solid $gray-scale--light;
+        }
+
+        &--shadow {
+            display: block;
+
+            height: 280px;
+            width: 280px;
+            position: absolute;
+
+            z-index: -1;
+
+            border-radius: 50%;
+            box-shadow: $light-shadow;
+        }
+    }
+
+    &__title {
+        grid-area: title;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        width: calc(100% + 150px);
+        margin-left: -150px;
+        padding-left: 150px;
+
+        background: $gray-scale--light;
+        border-top-right-radius: 100px;
+
+        & h1 {
+            font-size: 3rem;
+        }
+
+        & i {
+            font-size: 3rem;
+            margin-left: 1rem;
+        }
+    }
+
+    &__rating {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        height: 4rem;
+        width: 280px;
+        margin: 0.5rem 10px 0.5rem 0px;
+        padding: 0rem 2rem;
+
+        border-radius: 2rem;
+        background: $gray-scale--light;
+        box-shadow: $extra-light-shadow;
+
+        & i {
+            font-size: 1.5rem;
+        }
+    }
+    
+    &__nav {
+        grid-area: nav;
+        margin-top: -1rem;
+
+        & ul {
+            list-style: none;
+            padding: 0rem;
+            margin: 0rem;
+
+            & li a,
+            & li button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                height: 4rem;
+                width: 280px;
+                margin: 0.5rem 10px 0.5rem 0px;
+                
+                border-radius: 2rem;
+                background: $gray-scale--light;
+                box-shadow: $extra-light-shadow;
+                border: none;
+
+                text-decoration: none;
+                font-size: 1.5rem;
+                font-weight: $bold;
+
+                &:hover, &.active {
+                    background: $gray-scale--med-light;
+                }
+            }
+        }
+    }
+
+    &__info {
+        grid-area: info;
+
+        margin-top: 1rem;
+    }
+
+    &__review-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 3rem;
+        margin-bottom: 1rem;
+
+        border: none;
+        background: $gray-scale--light;
+        background-size: 200% auto;
+        border-radius: 1rem;
+        box-shadow: $extra-light-shadow;
+
+        font-size: 1.5rem;
+        font-weight: $bold;
+        color: $gray-scale--dark;
+
+        &:hover {
+            background: $gray-scale--med-light;
+        }
+    }
+
+    &__menu {
+        border-radius: 1rem;
+        padding: 1rem;
+        background: $gray-scale--light;
+        box-shadow: $extra-light-shadow;
+
+        &-header h2 {
+            font-family: 'Roboto', sans-serif;
+            margin: 0rem;
+            font-size: 1.5rem;
+            font-weight: $bold;
+        }
+
+        &-section-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+
+            h3 {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                margin: 0rem;
+                font-size: 1.2rem;
+            }
+
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+
+        &-item {
+            &-group {
+                display: grid;
+                grid-template-columns: 2fr 1fr; 
+            }
+
+            &-name {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            &-price {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    &__gallery {
+        border-radius: 1rem;
+        padding: 1rem;
+        background: $gray-scale--light;
+        box-shadow: $extra-light-shadow;
+
+        & h2 {
+            font-size: 1.5rem;
+            margin: 0rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        &-slider {
+            margin: 0rem 3rem;
+
+            & img {
+                height: 130px;
+                margin: 0rem 0.5rem;
+            }
+        }
+    }
+}
+
+.default-post {
+    &--review {
+        display: grid;
+        grid-template-columns: 4rem 1fr 8rem;
+        grid-template-rows: 2.5rem 1.5rem 0.5rem 1fr 0.5rem 1.5rem;
+        grid-template-areas:
+            "   image       poster        rating   "
+            "   image      posttime         .      "
+            "     .            .            .      "
+            "  content      content      content   "
+            "     .            .            .      "
+            "interactions interactions interactions";
+    }
+
+    &--review--with-comments {
+
+    }
+
+    &__rating {
+        grid-area: rating;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+
+        padding-bottom: 0.5rem;
+    }
+}

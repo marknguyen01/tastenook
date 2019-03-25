@@ -91477,6 +91477,13 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/sass/tastenook/tastenook.scss":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/assets/sass/welcome.scss":
 /***/ (function(module, exports) {
 
@@ -91489,7 +91496,8 @@ module.exports = Component.exports
 
 __webpack_require__("./resources/assets/js/app.js");
 __webpack_require__("./resources/assets/sass/app.scss");
-module.exports = __webpack_require__("./resources/assets/sass/welcome.scss");
+__webpack_require__("./resources/assets/sass/welcome.scss");
+module.exports = __webpack_require__("./resources/assets/sass/tastenook/tastenook.scss");
 
 
 /***/ })

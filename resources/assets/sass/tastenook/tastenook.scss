@@ -1,0 +1,38 @@
+/**
+ * Tastenook Stylesheet v1.0
+ * Created by Christian Schulmeister
+ */
+
+@import "partials/variables";
+
+* {
+    box-sizing: border-box;
+    background: none;
+    outline: none;
+    font-family: 'Roboto', sans-serif;
+    transition: all ease-in-out 0.3s;
+    color: $gray-scale--dark;
+}
+
+:root {
+    font-size: 16px;
+}
+
+html, body {
+    margin: 0 auto;
+}
+
+@import "partials/typography";
+@import "partials/buttons";
+@import "partials/forms";
+@import "partials/modals";
+@import "partials/_misc";
+@import "partials/landing";
+@import "partials/header";
+@import "partials/dashboard";
+@import "partials/profile";
+
+/* Currently unused partials
+@import "partials/tables";
+@import "partials/lists";
+*/

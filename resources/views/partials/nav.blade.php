@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<!-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {!! config('app.name', trans('titles.app')) !!}
@@ -83,4 +83,53 @@
             </ul>
         </div>
     </div>
+</nav> -->
+
+<nav class="header navbar navbar-expand-md navbar-light navbar-laravel">
+    <div class="header__menu-button">
+        <i class="fas fa-bars menu-modal__trigger"></i>
+    </div>
+    <div class="header__logo">
+        <!-- TODO: Add route to dashboard on this link. -->
+        <a href="/"><h1>TasteNook</h1></a>
+    </div>
+    <div class="header__search-bar">
+        <!-- TODO: Add route for search form. -->
+        <form method="GET" action="" class="search-form">
+            <input type="text" name="searchQuery" class="search-form__text-input" placeholder="Search...">
+            <button type="submit" class="search-form__button bubble-button--icon"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <ul class="navbar-nav ml-auto user-panel">
+        {{-- Authentication Links --}}
+        @guest
+            <li><a class="nav-link" href="{{ route('login') }}">{{ trans('titles.login') }}</a></li>
+            <li><a class="nav-link" href="{{ route('register') }}">{{ trans('titles.register') }}</a></li>
+        @else
+            <li class="nav-item dropdown user-panel__icons">
+                <i class="far fa-bell user-panel__notifications-trigger"></i>
+            </li>
+            <li class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="user-avatar-nav user-panel__picture">
+                    {{ Auth::user()->first_name . ' ' . Auth::user()->last_name }} <span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
+                        {!! trans('titles.profile') !!}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </div>
+            </li>
+        @endguest
+    </ul>
 </nav>

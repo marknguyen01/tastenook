@@ -10,7 +10,7 @@
 
     <title>@if (trim($__env->yieldContent('template_title')))@yield('template_title') | @endif {{ config('app.name', Lang::get('titles.app')) }}</title>
     <meta name="description" content="">
-    <meta name="author" content="Jeremy Kenedy">
+    <meta name="author" content="Mark Nguyen">
     <link rel="shortcut icon" href="/favicon.ico">
 
     {{-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --}}
@@ -23,7 +23,10 @@
     @yield('template_linked_fonts')
 
     {{-- Styles --}}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="../css/tastenook.css">
+
 
     @yield('template_linked_css')
 

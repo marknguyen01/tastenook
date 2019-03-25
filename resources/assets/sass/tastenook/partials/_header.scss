@@ -1,0 +1,117 @@
+.header {
+    display: grid;
+    grid-template-columns: 4rem 1fr 1fr 1fr;
+    grid-template-areas:
+        "menu-button logo search-bar user-panel";
+    grid-gap: 0.5rem;
+
+    height: 4rem;
+    min-width: 100vw;
+    padding: 0px 2rem;
+    top: 0px;
+    z-index: 100;
+
+    background-color: $gray-scale--light;
+    box-shadow: $extra-light-shadow;
+
+    &__menu-button {
+        grid-area: menu-button;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & i {
+            font-size: 2rem;
+            color: $gray-scale--med;
+
+            &:hover {
+                cursor: pointer;
+                color: $gray-scale--dark;
+            }
+        }
+    }
+
+    &__logo {
+        grid-area: logo;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        & h1 {
+            margin: 0rem;
+            color: $gray-scale--dark;
+        }
+    }
+
+    &__search-bar {
+        grid-area: search-bar;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.user-panel {
+    grid-area: user-panel;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    position: relative;
+
+    &__picture {
+        margin-right: 1rem;
+
+        & img {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+        }
+    }
+
+    &__username {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        font-weight: $bold;
+        color: $gray-scale--dark;
+    }
+
+    &__icons {
+        margin-right: 1rem;
+    }
+
+    &__header {
+        font-weight: $bold;
+        font-size: 1.5rem;
+    }
+
+    &__settings {
+        position: absolute;
+
+        top: calc(60px + 1rem);
+        right: 0px;
+        width: 250px;
+        padding: 1rem;
+
+        border-radius: 1rem;
+        background: white;
+        transition: all 0s;
+    }
+
+    &__trigger,
+    &__triggered,
+    &__notifications-trigger {
+        font-size: 2rem;
+        color: $gray-scale--med;
+
+        &:hover {
+            cursor: pointer;
+            color: $gray-scale--dark;
+        }
+    }
+
+}

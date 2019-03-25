@@ -1,0 +1,234 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+        "feed sidebar";
+    width: $wrapper-width;
+    margin: calc(60px + 1rem) auto 0;
+    position: relative;
+    z-index: 1;
+}
+
+.default-post {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    grid-template-rows: 2.5rem 1.5rem 0.5rem 1fr 0.5rem 1.5rem;
+    grid-template-areas:
+        "image poster"
+        "image posttime"
+        ". ."
+        "content content"
+        ". ."
+        "interactions interactions";
+    
+    margin-bottom: 1rem;
+    padding: 1rem;
+
+    border-radius: 1rem;
+    background: $gray-scale--light;
+    box-shadow: $shadow--small;
+
+    &--with-comments {
+        display: grid;
+        grid-template-columns: 4rem 1fr;
+        grid-template-rows: 2.5rem 1.5rem auto 1rem auto 2.5rem;
+        grid-template-areas:
+            "image poster"
+            "image posttime"
+            "content content"
+            "interactions interactions"
+            "comments comments"
+            "addcomment addcomment";
+    }
+
+    &__image {
+        grid-area: image;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & img {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+        }
+    }
+
+    &__poster {
+        grid-area: poster;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        margin-left: 1rem;
+        
+        font-weight: $bold;
+        font-size: 1.5rem;
+    }
+
+    &__posttime {
+        grid-area: posttime;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        margin: 0px 0px 1rem 1rem;
+
+        color: $gray-scale--med;
+    }
+
+    &__content {
+        grid-area: content;
+    }
+
+    &__interactions {
+        grid-area: interactions;
+
+        &-group {
+            height: 1.5rem;
+            width: 4.5rem;
+
+            background: none;
+            border: none;
+            border-radius: 0.75rem;
+
+            font-size: 1rem;
+            color: $gray-scale--med;
+
+            &:hover {
+                background: $gray-scale--med-light;
+                color: $gray-scale--dark;
+            }
+        }
+
+        & i, 
+        &-number {
+            color: inherit;
+            transition: all 0s;
+        }
+    }
+
+    &__comments {
+        padding-top: 0.5rem;
+        grid-area: comments;
+    }
+
+    &__add-comment {
+        grid-area: addcomment;
+    }
+}
+
+.default-comment {
+    display: grid;
+    grid-template-columns: 3rem 0.5rem 1fr;
+    grid-template-rows: 1.5rem 1.5rem auto;
+    grid-template-areas:
+        "picture . poster"
+        "picture . body"
+        "   .    . body";
+    margin: 0.25rem 0rem;
+
+    &__picture {
+        grid-area: picture;
+
+        & img {
+            height: 3rem;
+            width: 3rem;
+
+            border-radius: 50%;
+        }
+    }
+
+    &__poster {
+        grid-area: poster;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        color: $gray-scale--dark;
+        font-size: 1.2rem;
+        font-weight: $bold;
+
+        &--data {
+            margin-left: 0.5rem;
+
+            color: $gray-scale--med;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+    }
+
+    &__body {
+        grid-area: body;
+        
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: white;
+    }
+}
+
+.sidebar {
+    &-box {
+        padding: 1rem;
+        margin-bottom: 1rem;
+
+        border-radius: 1rem;
+        background: $gray-scale--light;
+        box-shadow: $shadow--small;
+    }
+}
+
+.trending-deals {
+    &__header {
+        font-weight: $bold;
+        font-size: 1.5rem;
+    }
+
+    &__deal {
+        display: grid;
+        grid-template-columns: 2rem 1fr 2rem;
+
+        height: 2rem;
+
+        & img {
+            height: 1.5rem;
+            width: 1.5rem;
+            margin: 0.25rem;
+            border-radius: 50%;
+        }
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+    }
+
+    &__trend-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0.25rem;
+
+        & i {
+            color: white;
+        }
+
+        &--up {
+            background: $good-green;
+        }
+
+        &--down {
+            background: $bad-red;
+        }
+    }
+}

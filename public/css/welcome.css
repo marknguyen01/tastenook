@@ -24,9 +24,7 @@ body {
 }
 
 #intro .container > .row {
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: fill-available;
+  height: scretch;
 }
 
 #intro .container > .row #navbar #brand-name {

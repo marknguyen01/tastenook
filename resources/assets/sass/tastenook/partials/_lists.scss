@@ -1,0 +1,46 @@
+.default-ol {
+    list-style: none;
+    counter-reset: ol-counter;
+
+    & li {
+        counter-increment: ol-counter;
+        list-style-type: none;
+        margin: 0px 0px 0.3rem 0.6rem;
+
+        &::before {
+            content: conuter(ol-counter) ". ";
+            color: $main-color-1;
+            font-weight: $bold;
+            margin-left: -20px;
+
+            @supports (-webkit-background-clip: text) {
+                & {
+                    background: $main-gradient;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+            }
+        }
+    }
+}
+
+.default-ul {
+    list-style: none;
+
+    & li {
+        margin: 0px 0px 0.3rem 0.6rem;
+
+        &::before {
+            content: '';
+            display: inline-block;
+
+            height: 10px;
+            width: 10px;
+            margin: 0px 10px 0px -20px;
+
+            border-radius: 50%;
+            background: $main-gradient;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+.gradient-divider {
+    height: 0.2rem;
+    width: 100%;
+
+    border: none;
+    background: $main-gradient;
+}
+
+.default-divider {
+    height: 0.1rem;
+    width: 100%;
+
+    border: none;
+    background: $gray-scale--med-light;
+}
+
+.background {
+    height: 120vh;
+    width: 120vw;
+    background: $main-gradient;
+    position: fixed;
+    margin-top: -70px;
+    z-index: -1;
+}
