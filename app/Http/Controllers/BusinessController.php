@@ -11,7 +11,7 @@ class BusinessController extends Controller
       $business = Business::where('slug', $slug)->first();
 
       if($business) {
-        return view('businesses/show');
+        return view('businesses/show', ['business' => $business]);
       }
       else {
         abort(404);
