@@ -23,6 +23,7 @@
 
     {{-- Styles --}}
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <link href="{{ asset('/css/welcome.css') }}" rel="stylesheet">
 
@@ -106,16 +107,36 @@
         </div>
     </header>
     <div class="container">
-      <h2>New Business</h2>
-      <div class="row businesses">
-        @foreach ($newBusinesses as $business)
-          <div class="col-4 business">
-            <a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
-                <img src="{{ $business->avatar }}" alt="{{ $business->name }}">
-                {{ $business->name }}
-            </a>
+      <div id="new-businesses" class="businesses">
+          <h2 class="text-center business-heading my-3 my-lg-5">New Restaurants in Charlotte</h2>
+          <div class="row p-3 p-lg-0">
+              @foreach ($newBusinesses as $business)
+                <div class="col-12 col-md-4">
+                    <div class="business row py-3">
+                        <div class="col-6 business-info">
+                            <h4><a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
+                            {{ $business->name }}
+                            </a></h4>
+                            <div class="business-rating">
+                                @for($i = 0; $i < round($business->vote_avg, 0); $i++)
+                                    <i class="fas fa-star"></i>
+                                @endfor
+
+                                @for($i = 0; $i < (5 - round($business->vote_avg, 0)); $i++)
+                                    <i class="far fa-star"></i>
+                                @endfor
+                            </div>
+                            <span class="business-status">Open {{ time_elapsed_string($business->created_at) }}</span>
+                        </div>
+                        <div class="col-6 business-img">
+                            <a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
+                                <img src="{{ $business->avatar }}" alt="{{ $business->name }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+              @endforeach
           </div>
-        @endforeach
       </div>
     </div>
 
