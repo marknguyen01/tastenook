@@ -31,11 +31,11 @@ body {
             #navbar {
                 #brand-name {
                     color: $white;
-                    text-transform: uppercase;
                     h2 {
                         display: inline-block;
                         margin: 0;
                         vertical-align: text-top;
+                        font-family: "Lobster", cursive;
                     }
                 }
                 #user-info {

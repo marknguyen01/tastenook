@@ -31,13 +31,13 @@ body {
 
 #intro .container > .row #navbar #brand-name {
   color: #ffffff;
-  text-transform: uppercase;
 }
 
 #intro .container > .row #navbar #brand-name h2 {
   display: inline-block;
   margin: 0;
   vertical-align: text-top;
+  font-family: "Lobster", cursive;
 }
 
 #intro .container > .row #navbar #user-info a.nav-link {
