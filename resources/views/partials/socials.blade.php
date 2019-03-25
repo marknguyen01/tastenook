@@ -2,7 +2,7 @@
     <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => 'facebook']), 'fa fa-facebook', 'Facebook', array('class' => 'btn btn-block btn-social btn-facebook')) !!}
     </div>
-    <div class="col-sm-6 mb-2">
+    <!-- <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => 'twitter']), 'fa fa-twitter', 'Twitter', array('class' => 'btn btn-block btn-social btn-twitter')) !!}
     </div>
     <div class="col-sm-6 mb-2">
@@ -22,5 +22,5 @@
     </div>
     <div class="col-sm-6 mb-2">
         {!! HTML::icon_link(route('social.redirect',['provider' => '37signals']), 'fa fa-signal', 'Basecamp', array('class' => 'btn btn-block btn-social btn-basecamp btn-warning')) !!}
-    </div>
+    </div> -->
 </div>
