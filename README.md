@@ -39,7 +39,7 @@ Route::get('user/profile', function () {
 
 ## USEFUL TIPS
 1. Do a `git pull origin master` before you start coding, so your local repository is updated with the remote one on Github
-2. Refresh migration and seed: `php artisan migration:refresh --seed`  
+2. Refresh migration and seed (To clean the database records and create fake records): `php artisan migration:refresh --seed`  
 3. HTML templates are stored in resources/views
 4. Other assets such as SASS and JS are stored in resources/assets, they get compiled automically by running `npm run watch` and to config which files to compile, it is in `webpack.mix.js` file
 
