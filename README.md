@@ -31,7 +31,7 @@
 1. You must have `homepage.blade.php` inside `resources/views` folder
 2. Add the following code in `routes/web.php` file
 ```
-Route::get('user/profile', function () {
+Route::get('/home', function () {
     return view('homepage');
 })
 ```
