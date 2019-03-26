@@ -16,7 +16,7 @@
 ## HOW TO INSTALL
 1. Clone this Github
 2. Install PHP and Composer [(How To)](https://www.jeffgeerling.com/blog/2018/installing-php-7-and-composer-on-windows-10)
-3. Install NodeJS
+3. Install [NodeJS](https://nodejs.org/en/)
 4. Download [this environment file](https://drive.google.com/open?id=1yfppt_JXePYrMWGLZAEZGIzbi_8nv_SY) and put it in the folder you just cloned
 5. To install the dependencies, run the terminal in folder you just cloned and run this command `composer update`
 6. To run the website locally, run this command in terminal `php artisan serve`
