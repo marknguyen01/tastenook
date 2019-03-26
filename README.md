@@ -26,11 +26,22 @@
 1. [Atom text editor](https://atom.io/) with [Github integration addon](https://atom.io/packages/github) installed
 2. [Datagrip](https://www.jetbrains.com/datagrip/) for database queries
 
+## SIMPLE EXPLANATION OF LARAVEL
+- Laravel uses a MVC (Model-View-Controller) architecture. It uses a HTML template system called Blade. To create a page, first you need to set up a [Route](https://laravel.com/docs/5.8/routing). For example, to display a HTML page called homepage.blade.php on /home
+1. You must have `homepage.blade.php` inside `resources/views` folder
+2. Add the following code in `routes/web.php` file
+```
+Route::get('user/profile', function () {
+    return view('homepage');
+})
+```
+
 
 ## USEFUL TIPS
 1. Do a `git pull origin master` before you start coding, so your local repository is updated with the remote one on Github
 2. Refresh migration and seed: `php artisan migration:refresh --seed`  
-
+3. HTML templates are stored in resources/views
+4. Other assets such as SASS and JS are stored in resources/assets, they get compiled automically by running `npm run watch` and to config which files to compile, it is in `webpack.mix.js` file
 
 ## USEFUL COMMANDS
 1. Refresh migration and seed: `php artisan migration:refresh --seed`  
