@@ -1,3 +1,8 @@
+## FRAMEWORKS
+1. [Laravel PHP Framework](https://laravel.com/docs/5.7)
+2. [Bootstrap 4 CSS Framework](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+3. [VueJS](https://vuejs.org/) already integrated in Laravel framework but not used
+
 ## TO DO
 - [X] Automatically generate username for profile links
 - [ ] Be able to assign a business to a user in admin console
