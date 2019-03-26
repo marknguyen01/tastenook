@@ -42,6 +42,3 @@ Route::get('user/profile', function () {
 2. Refresh migration and seed (To clean the database records and create fake records): `php artisan migration:refresh --seed`  
 3. HTML templates are stored in resources/views
 4. Other assets such as SASS and JS are stored in resources/assets, they get compiled automically by running `npm run watch` and to config which files to compile, it is in `webpack.mix.js` file
-
-## USEFUL COMMANDS
-1. Refresh migration and seed: `php artisan migration:refresh --seed`  
