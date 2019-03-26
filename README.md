@@ -23,7 +23,7 @@
 
 
 ## OPTIONAL TOOLS
-1. [Atom text editor](https://atom.io/) with Git integration addon installed
+1. [Atom text editor](https://atom.io/) with [Github integration addon](https://atom.io/packages/github) installed
 2. [Datagrip](https://www.jetbrains.com/datagrip/) for database queries
 
 
