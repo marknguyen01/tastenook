@@ -18,10 +18,11 @@ class BusinessesTableSeeder extends Seeder
       $business = Business::create([
         'name'      =>  $name,
         'slug'      =>  $slug,
-        'address'   =>  '9320 Steele Creek Rd, Charlotte, NC 28273',
+        'street_address'   =>  '9320 Steele Creek Rd',
         'city'      =>  'Charlotte',
         'state'     =>  'NC',
         'zip_code'  =>  '28273',
+        'phone_number' => '7045839274',
         'vote_avg'  => '3.4',
       ]);
       // Generate placholder images

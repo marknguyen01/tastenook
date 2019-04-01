@@ -20,10 +20,11 @@ class CreateBusinessesTable extends Migration
             $table->string('avatar')->default('/images/default_business.jpg');
 
             // Business address
-            $table->string('address');
+            $table->string('street_address');
             $table->string('city');
             $table->string('state', 2);
             $table->string('zip_code', 5);
+            $table->string('phone_number', 10);
 
             $table->double('vote_avg', 2, 1)->default(0);
 
