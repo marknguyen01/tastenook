@@ -12,6 +12,7 @@
         "google/recaptcha": "^1.1",
         "intervention/image": "^2.4",
         "jaybizzle/laravel-crawler-detect": "1.*",
+        "jcc/laravel-vote": "^1.1",
         "jeremykenedy/laravel-exception-notifier": "^1.1",
         "jeremykenedy/laravel-https": "^1.1",
         "jeremykenedy/laravel-logger": "^2.0",
