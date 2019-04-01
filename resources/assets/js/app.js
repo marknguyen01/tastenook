@@ -63,3 +63,6 @@ $.fn.extend({
         return !additions ? self : self.addClass(additions);
     }
 });
+$(document).ready(function(){
+    console.log("Document ready!");
+})

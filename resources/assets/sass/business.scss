@@ -1,0 +1,37 @@
+@import "colors";
+
+a {
+    color: $text-accent-color;
+
+    &:active, &:hover {
+        text-decoration: none;
+    }
+}
+.carousel-slide {
+    &__control {
+        position: relative;
+        bottom: 20%;
+        left: 50%;
+        background: $white;
+        border-radius: 3px;
+    }
+}
+
+
+.profile {
+    &__title {
+        h1 {
+            display: inline-block;
+        }
+        i {
+            font-size: 2.25rem;
+            margin-left: 5px;
+            color: $red;
+        }
+    }
+    &__rating {
+        .fas {
+            color: $green;
+        }
+    }
+}

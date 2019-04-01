@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -25,7 +25,6 @@
     {{-- Styles --}}
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="../css/tastenook.css">
 
 
     @yield('template_linked_css')
@@ -61,8 +60,7 @@
 
         @include('partials.nav')
 
-        <main class="py-4">
-
+        <main>
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -78,8 +76,8 @@
     </div>
 
     {{-- Scripts --}}
-    <script src="{{ mix('/js/app.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
     @if(config('settings.googleMapsAPIStatus'))
         {!! HTML::script('//maps.googleapis.com/maps/api/js?key='.config("settings.googleMapsAPIKey").'&libraries=places&dummy=.js', array('type' => 'text/javascript')) !!}
     @endif

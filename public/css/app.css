@@ -17264,3 +17264,36 @@ div[data-toggle="buttons"] label.active {
   font-family: 'Lobster', cursive;
 }
 
+/* Business */
+
+a {
+  color: #7f8187;
+}
+
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+.carousel-slide__control {
+  position: relative;
+  bottom: 20%;
+  left: 50%;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.profile__title h1 {
+  display: inline-block;
+}
+
+.profile__title i {
+  font-size: 2.25rem;
+  margin-left: 5px;
+  color: #e9342c;
+}
+
+.profile__rating .fas {
+  color: #8bc058;
+}
+
