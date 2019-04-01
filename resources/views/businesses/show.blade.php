@@ -13,7 +13,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 mx-0 px-0 {{ $i < 3 ? 'd-md-block d-none' : ''}}">
                     <img src="{{ asset('images/businesses/profile/' . $business->slug . '/cover.jpg') }}" class="w-100">
                     @if($i == 3)
-                        <span class="carousel-slide__control p-2"><a href="gallery">View Gallery</a></span>
+                        <span class="carousel-slide__control p-2"><a href="/b/{{ $business->slug }}/gallery">View Gallery</a></span>
                     @endif
                 </div>
             @endfor
@@ -23,20 +23,24 @@
         <div class="row">
             <div class="col-lg-8 col-sm-12">
                 <div class="profile__title ">
-                    <!-- TODO: Change text to the company's name. -->
                     <h1>{{ $business->name }}</h1>
-                    <!-- TODO: Add logic to change icon based on if the company is favorited. -->
-                    <!--    If the company is favorited, change from "far fa-heart" to "fas fa-heart" -->
-                    <i class="far fa-heart"></i>
                 </div>
                 <div class="profile__rating">
-                    @for($i = 0; $i < round($business->vote_avg, 0); $i++)
+                    <h2>@for($i = 0; $i < round($business->vote_avg, 0); $i++)
                         <i class="fas fa-star"></i>
                     @endfor
 
                     @for($i = 0; $i < (5 - round($business->vote_avg, 0)); $i++)
                         <i class="far fa-star"></i>
-                    @endfor
+                    @endfor</h2>
+                </div>
+                <div class="btn-group profile__action" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-danger p-2">Leave a review</button>
+                  <button type="button" class="btn btn-secondary">Follow</button>
+                  <button type="button" class="btn btn-secondary">Message</button>
+                </div>
+                <div class="profile__maps mt-3">
+                  <div id="map" class="h-100"></div>
                 </div>
             </div>
             <div class="col-sm-12 col-lg-4">
@@ -49,7 +53,7 @@
                           </li>
                           <li class="list-group-item">
                               <i class="fas fa-map-marker-alt"></i>
-                              <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($business->address) }}" alt={{ $business->address}}>
+                              <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($business->address) }}" alt="{{ $business->address}}">
                                   {{ $business->address }}
                               </a>
                           </li>
@@ -126,8 +130,7 @@
 
 
 @section('footer_scripts')
-<script src="{{ asset('js/modal.js') }}"></script>
-<script src="{{ asset('js/tooltip.js') }}"></script>
-<script src="{{ asset('js/slick.min.js') }}"></script>
+<script src="{{ asset('js/business.js') }}" type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDS81L_9IA13cq25Ihd2GfVhl9fvv1kP8&callback=initMap"></script>
 
 @endsection

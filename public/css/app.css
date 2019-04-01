@@ -17297,3 +17297,7 @@ a:hover {
   color: #8bc058;
 }
 
+.profile__map {
+  height: 30vh;
+}
+
