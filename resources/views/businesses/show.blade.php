@@ -45,6 +45,7 @@
                         <ul class="list-group">
                           <li class="list-group-item">
                               <i class="fas fa-phone"></i>
+                              <a href="tel:{{ $business->phone_number }}" alt="{{ $business->phone_number }}">{{ $business->phone_number }}</a>
                           </li>
                           <li class="list-group-item">
                               <i class="fas fa-map-marker-alt"></i>
