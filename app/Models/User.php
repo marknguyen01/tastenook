@@ -13,6 +13,7 @@ class User extends Authenticatable
     use HasRoleAndPermission;
     use Notifiable;
     use SoftDeletes;
+    use Vote;
 
     /**
      * The database table used by the model.
@@ -115,5 +116,9 @@ class User extends Authenticatable
 
     public function businesses() {
       return $this->belongsToMany('App\Models\Business', 'business_user');
+    }
+
+    public function reviews() {
+      return $this->hasMany('App\Models\Review');
     }
 }

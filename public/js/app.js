@@ -32805,22 +32805,13 @@ var Echo = function () {
             return this.connector.presenceChannel(channel);
         }
         /**
-         * Leave the given channel, as well as its private and presence variants.
+         * Leave the given channel.
          */
 
     }, {
         key: 'leave',
         value: function leave(channel) {
             this.connector.leave(channel);
-        }
-        /**
-         * Leave the given channel.
-         */
-
-    }, {
-        key: 'leaveChannel',
-        value: function leaveChannel(channel) {
-            this.connector.leaveChannel(channel);
         }
         /**
          * Listen for an event on a channel instance.
@@ -70052,7 +70043,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
- * Pusher JavaScript Library v4.4.0
+ * Pusher JavaScript Library v4.3.1
  * https://pusher.com/
  *
  * Copyright 2017, Pusher
@@ -70181,17 +70172,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _this.timelineSender.send(_this.connection.isUsingTLS());
 	            }
 	        });
-	        this.connection.bind('message', function (event) {
-	            var eventName = event.event;
-	            var internal = (eventName.indexOf('pusher_internal:') === 0);
-	            if (event.channel) {
-	                var channel = _this.channel(event.channel);
+	        this.connection.bind('message', function (params) {
+	            var internal = (params.event.indexOf('pusher_internal:') === 0);
+	            if (params.channel) {
+	                var channel = _this.channel(params.channel);
 	                if (channel) {
-	                    channel.handleEvent(event);
+	                    channel.handleEvent(params.event, params.data);
 	                }
 	            }
 	            if (!internal) {
-	                _this.global_emitter.emit(event.event, event.data);
+	                _this.global_emitter.emit(params.event, params.data);
 	            }
 	        });
 	        this.connection.bind('connecting', function () {
@@ -70533,7 +70523,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 	var Defaults = {
-	    VERSION: "4.4.0",
+	    VERSION: "4.3.1",
 	    PROTOCOL: 7,
 	    host: 'ws.pusherapp.com',
 	    ws_port: 80,
@@ -71083,9 +71073,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        },
 	        javascriptQuickStart: {
 	            path: "/docs/javascript_quick_start"
-	        },
-	        triggeringClientEvents: {
-	            path: "/docs/client_api_guide/client_events#trigger-events"
 	        }
 	    }
 	};
@@ -71642,21 +71629,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.unbind_global();
 	        return this;
 	    };
-	    Dispatcher.prototype.emit = function (eventName, data, metadata) {
-	        for (var i = 0; i < this.global_callbacks.length; i++) {
+	    Dispatcher.prototype.emit = function (eventName, data) {
+	        var i;
+	        for (i = 0; i < this.global_callbacks.length; i++) {
 	            this.global_callbacks[i](eventName, data);
 	        }
 	        var callbacks = this.callbacks.get(eventName);
-	        var args = [];
-	        if (metadata) {
-	            args.push(data, metadata);
-	        }
-	        else if (data) {
-	            args.push(data);
-	        }
 	        if (callbacks && callbacks.length > 0) {
-	            for (var i = 0; i < callbacks.length; i++) {
-	                callbacks[i].fn.apply(callbacks[i].context || (window), args);
+	            for (i = 0; i < callbacks.length; i++) {
+	                callbacks[i].fn.call(callbacks[i].context || (window), data);
 	            }
 	        }
 	        else if (this.failThrough) {
@@ -72883,35 +72864,30 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports) {
 
 	"use strict";
-	exports.decodeMessage = function (messageEvent) {
+	exports.decodeMessage = function (message) {
 	    try {
-	        var messageData = JSON.parse(messageEvent.data);
-	        var pusherEventData = messageData.data;
-	        if (typeof pusherEventData === 'string') {
+	        var params = JSON.parse(message.data);
+	        if (typeof params.data === 'string') {
 	            try {
-	                pusherEventData = JSON.parse(messageData.data);
+	                params.data = JSON.parse(params.data);
 	            }
-	            catch (e) { }
+	            catch (e) {
+	                if (!(e instanceof SyntaxError)) {
+	                    throw e;
+	                }
+	            }
 	        }
-	        var pusherEvent = {
-	            event: messageData.event,
-	            channel: messageData.channel,
-	            data: pusherEventData
-	        };
-	        if (messageData.user_id) {
-	            pusherEvent.user_id = messageData.user_id;
-	        }
-	        return pusherEvent;
+	        return params;
 	    }
 	    catch (e) {
-	        throw { type: 'MessageParseError', error: e, data: messageEvent.data };
+	        throw { type: 'MessageParseError', error: e, data: message.data };
 	    }
 	};
-	exports.encodeMessage = function (event) {
-	    return JSON.stringify(event);
+	exports.encodeMessage = function (message) {
+	    return JSON.stringify(message);
 	};
-	exports.processHandshake = function (messageEvent) {
-	    var message = exports.decodeMessage(messageEvent);
+	exports.processHandshake = function (message) {
+	    message = exports.decodeMessage(message);
 	    if (message.event === "pusher:connection_established") {
 	        if (!message.data.activity_timeout) {
 	            throw "No activity timeout specified in handshake";
@@ -73003,12 +72979,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return this.transport.send(data);
 	    };
 	    Connection.prototype.send_event = function (name, data, channel) {
-	        var event = { event: name, data: data };
+	        var message = { event: name, data: data };
 	        if (channel) {
-	            event.channel = channel;
+	            message.channel = channel;
 	        }
-	        logger_1["default"].debug('Event sent', event);
-	        return this.send(Protocol.encodeMessage(event));
+	        logger_1["default"].debug('Event sent', message);
+	        return this.send(Protocol.encodeMessage(message));
 	    };
 	    Connection.prototype.ping = function () {
 	        if (this.transport.supportsPing()) {
@@ -73024,23 +73000,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Connection.prototype.bindListeners = function () {
 	        var _this = this;
 	        var listeners = {
-	            message: function (messageEvent) {
-	                var pusherEvent;
+	            message: function (m) {
+	                var message;
 	                try {
-	                    pusherEvent = Protocol.decodeMessage(messageEvent);
+	                    message = Protocol.decodeMessage(m);
 	                }
 	                catch (e) {
 	                    _this.emit('error', {
 	                        type: 'MessageParseError',
 	                        error: e,
-	                        data: messageEvent.data
+	                        data: m.data
 	                    });
 	                }
-	                if (pusherEvent !== undefined) {
-	                    logger_1["default"].debug('Event recd', pusherEvent);
-	                    switch (pusherEvent.event) {
+	                if (message !== undefined) {
+	                    logger_1["default"].debug('Event recd', message);
+	                    switch (message.event) {
 	                        case 'pusher:error':
-	                            _this.emit('error', { type: 'PusherError', data: pusherEvent.data });
+	                            _this.emit('error', { type: 'PusherError', data: message.data });
 	                            break;
 	                        case 'pusher:ping':
 	                            _this.emit("ping");
@@ -73049,7 +73025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            _this.emit("pong");
 	                            break;
 	                    }
-	                    _this.emit('message', pusherEvent);
+	                    _this.emit('message', message);
 	                }
 	            },
 	            activity: function () {
@@ -73187,26 +73163,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	            callback(error, authData);
 	        });
 	    };
-	    PresenceChannel.prototype.handleEvent = function (event) {
-	        var eventName = event.event;
-	        if (eventName.indexOf("pusher_internal:") === 0) {
-	            this.handleInternalEvent(event);
-	        }
-	        else {
-	            var data = event.data;
-	            var metadata = {};
-	            if (event.user_id) {
-	                metadata.user_id = event.user_id;
-	            }
-	            this.emit(eventName, data, metadata);
-	        }
-	    };
-	    PresenceChannel.prototype.handleInternalEvent = function (event) {
-	        var eventName = event.event;
-	        var data = event.data;
-	        switch (eventName) {
+	    PresenceChannel.prototype.handleEvent = function (event, data) {
+	        switch (event) {
 	            case "pusher_internal:subscription_succeeded":
-	                this.handleSubscriptionSucceededEvent(event);
+	                this.subscriptionPending = false;
+	                this.subscribed = true;
+	                if (this.subscriptionCancelled) {
+	                    this.pusher.unsubscribe(this.name);
+	                }
+	                else {
+	                    this.members.onSubscription(data);
+	                    this.emit("pusher:subscription_succeeded", this.members);
+	                }
 	                break;
 	            case "pusher_internal:member_added":
 	                var addedMember = this.members.addMember(data);
@@ -73218,17 +73186,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    this.emit('pusher:member_removed', removedMember);
 	                }
 	                break;
-	        }
-	    };
-	    PresenceChannel.prototype.handleSubscriptionSucceededEvent = function (event) {
-	        this.subscriptionPending = false;
-	        this.subscribed = true;
-	        if (this.subscriptionCancelled) {
-	            this.pusher.unsubscribe(this.name);
-	        }
-	        else {
-	            this.members.onSubscription(event.data);
-	            this.emit("pusher:subscription_succeeded", this.members);
+	            default:
+	                private_channel_1["default"].prototype.handleEvent.call(this, event, data);
 	        }
 	    };
 	    PresenceChannel.prototype.disconnect = function () {
@@ -73281,7 +73240,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var dispatcher_1 = __webpack_require__(24);
 	var Errors = __webpack_require__(31);
 	var logger_1 = __webpack_require__(8);
-	var url_store_1 = __webpack_require__(14);
 	var Channel = (function (_super) {
 	    __extends(Channel, _super);
 	    function Channel(name, pusher) {
@@ -73301,35 +73259,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (event.indexOf("client-") !== 0) {
 	            throw new Errors.BadEventName("Event '" + event + "' does not start with 'client-'");
 	        }
-	        if (!this.subscribed) {
-	            var suffix = url_store_1["default"].buildLogSuffix("triggeringClientEvents");
-	            logger_1["default"].warn("Client event triggered before channel 'subscription_succeeded' event . " + suffix);
-	        }
 	        return this.pusher.send_event(event, data, this.name);
 	    };
 	    Channel.prototype.disconnect = function () {
 	        this.subscribed = false;
 	        this.subscriptionPending = false;
 	    };
-	    Channel.prototype.handleEvent = function (event) {
-	        var eventName = event.event;
-	        var data = event.data;
-	        if (eventName === "pusher_internal:subscription_succeeded") {
-	            this.handleSubscriptionSucceededEvent(event);
-	        }
-	        else if (eventName.indexOf("pusher_internal:") !== 0) {
-	            var metadata = {};
-	            this.emit(eventName, data, metadata);
-	        }
-	    };
-	    Channel.prototype.handleSubscriptionSucceededEvent = function (event) {
-	        this.subscriptionPending = false;
-	        this.subscribed = true;
-	        if (this.subscriptionCancelled) {
-	            this.pusher.unsubscribe(this.name);
+	    Channel.prototype.handleEvent = function (event, data) {
+	        if (event.indexOf("pusher_internal:") === 0) {
+	            if (event === "pusher_internal:subscription_succeeded") {
+	                this.subscriptionPending = false;
+	                this.subscribed = true;
+	                if (this.subscriptionCancelled) {
+	                    this.pusher.unsubscribe(this.name);
+	                }
+	                else {
+	                    this.emit("pusher:subscription_succeeded", data);
+	                }
+	            }
 	        }
 	        else {
-	            this.emit("pusher:subscription_succeeded", event.data);
+	            this.emit(event, data);
 	        }
 	    };
 	    Channel.prototype.subscribe = function () {
@@ -73341,7 +73291,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.subscriptionCancelled = false;
 	        this.authorize(this.pusher.connection.socket_id, function (error, data) {
 	            if (error) {
-	                _this.emit('pusher:subscription_error', data);
+	                _this.handleEvent('pusher:subscription_error', data);
 	            }
 	            else {
 	                _this.pusher.send_event('pusher:subscribe', {
@@ -73475,14 +73425,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    EncryptedChannel.prototype.trigger = function (event, data) {
 	        throw new Errors.UnsupportedFeature('Client events are not currently supported for encrypted channels');
 	    };
-	    EncryptedChannel.prototype.handleEvent = function (event) {
-	        var eventName = event.event;
-	        var data = event.data;
-	        if (eventName.indexOf("pusher_internal:") === 0 || eventName.indexOf("pusher:") === 0) {
-	            _super.prototype.handleEvent.call(this, event);
+	    EncryptedChannel.prototype.handleEvent = function (event, data) {
+	        if (event.indexOf("pusher_internal:") === 0 || event.indexOf("pusher:") === 0) {
+	            _super.prototype.handleEvent.call(this, event, data);
 	            return;
 	        }
-	        this.handleEncryptedEvent(eventName, data);
+	        this.handleEncryptedEvent(event, data);
 	    };
 	    EncryptedChannel.prototype.handleEncryptedEvent = function (event, data) {
 	        var _this = this;
