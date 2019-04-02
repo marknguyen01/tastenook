@@ -35,7 +35,11 @@
                 </div>
                 <div class="btn-group profile__action" role="group" aria-label="Basic example">
                 @auth
-                  <button type="button" class="btn btn-danger p-2">Leave a review</button>
+                  @allowed('review.businesses', $business)
+                    <a href="{{ route('review.create', $business->slug) }}" class="btn btn-danger p-2">Leave a review</a>
+                  @else
+                    <a href="{{ route('review.edit', $business->slug) }}" class="btn btn-danger p-2">Edit your review</a>
+                  @endallowed
                   <button type="button" class="btn btn-outline-secondary">Follow</button>
                   <button type="button" class="btn btn-outline-secondary">Message</button>
                 @else

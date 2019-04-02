@@ -58,7 +58,14 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
     ]);
 
     // Leaving Reviews
-    Route::post('/b/{slug}/review', 'BusinessController@store_review');
+    Route::prefix('/b/{slug}')->group(function() {
+      Route::post('/review/store', ['as' => 'review.store', 'uses' => 'ReviewController@store']);
+      Route::get('/review/create', ['as' => 'review.create', 'uses' => 'ReviewController@create']);
+      Route::get('/review/edit', ['as' => 'review.edit', 'uses' => 'ReviewController@edit']);
+    });
+
+
+
 });
 
 // Registered, activated, and is current user routes.
@@ -130,7 +137,9 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 });
 
 // Business route
-Route::get('b/{slug}', 'BusinessController@show');
+Route::resource('b', 'BusinessController', [
+  'only' => ['show'],
+]);
 
 
 Route::redirect('/php', '/phpinfo', 301);
