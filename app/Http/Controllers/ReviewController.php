@@ -56,4 +56,15 @@ class ReviewController extends Controller
       abort(404);
     }
   }
+
+  public function destroy($slug) {
+    $business = Business::where('slug', $slug)->first();
+    $user = \Auth::user();
+
+    if($user->reviews->where('business_id', $business->id)->delete()) {
+      return \Redirect::back()->with('The review is successfully deleted');
+    } else {
+      return \Redirect::back()->withErrors(['Something went wrong. Your review has not been deleted!']);
+    }
+  }
 }

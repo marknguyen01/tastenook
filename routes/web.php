@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
       Route::post('/review/store', ['as' => 'review.store', 'uses' => 'ReviewController@store']);
       Route::get('/review/create', ['as' => 'review.create', 'uses' => 'ReviewController@create']);
       Route::get('/review/edit', ['as' => 'review.edit', 'uses' => 'ReviewController@edit']);
+      Route::get('/review/delete', ['as' => 'review.delete', 'uses' => 'ReviewController@destroy']);
     });
 
 
