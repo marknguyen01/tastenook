@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('business_id');
             $table->timestamps();
-
+            $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('business_id')->references('id')->on('businesses');
         });
