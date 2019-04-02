@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Activation;
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Permission;
 use App\Traits\ActivationTrait;
 use App\Traits\CaptureIpTrait;
 use Auth;
@@ -180,6 +181,7 @@ class ActivateController extends Controller
         $currentRoute = Route::currentRouteName();
         $ipAddress = new CaptureIpTrait();
         $role = Role::where('slug', '=', 'user')->first();
+        $permission = Permission::where('slug', 'review.businesses')->first();
         $profile = new Profile();
 
         $rCheck = $this->activeRedirect($user, $currentRoute);
@@ -202,6 +204,7 @@ class ActivateController extends Controller
         $user->activated = true;
         $user->detachAllRoles();
         $user->attachRole($role);
+        $user->attachPermission($permission);
         $user->signup_confirmation_ip_address = $ipAddress->getClientIp();
         $user->profile()->save($profile);
         $user->save();
@@ -210,6 +213,7 @@ class ActivateController extends Controller
         foreach ($allActivations as $anActivation) {
             $anActivation->delete();
         }
+
 
         Log::info('Registered user successfully activated. '.$currentRoute.'. ', [$user]);
 

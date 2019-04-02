@@ -2,6 +2,7 @@
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Models\Role;
@@ -19,6 +20,7 @@ class UsersTableSeeder extends Seeder
         $profile = new Profile();
         $adminRole = Role::whereName('Admin')->first();
         $userRole = Role::whereName('User')->first();
+        $reviewPermission = Permission::where('slug', 'review.businesses')->first();
 
         // Seed test admin
         $seededAdminEmail = 'admin@admin.com';
@@ -38,6 +40,7 @@ class UsersTableSeeder extends Seeder
 
             $user->profile()->save($profile);
             $user->attachRole($adminRole);
+            $user->attachPermission($reviewPermission);
 
             // Add admin user to a business
             $user->businesses()->sync([1]);
@@ -62,6 +65,7 @@ class UsersTableSeeder extends Seeder
 
             $user->profile()->save(new Profile());
             $user->attachRole($userRole);
+            $user->attachPermission($reviewPermission);
             $user->save();
         }
 
