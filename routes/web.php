@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
+
+    // Leaving Reviews
+    Route::post('/b/{slug}/review', 'BusinessController@store_review');
 });
 
 // Registered, activated, and is current user routes.

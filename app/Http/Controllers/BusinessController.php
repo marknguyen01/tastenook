@@ -34,4 +34,28 @@ class BusinessController extends Controller
         abort(404);
       }
     }
+
+    public function store_review(Request $request, $slug) {
+      $validatedData = $request->validate([
+        'content' => 'required',
+        'rating' => 'required|integer|min:1|max:5',
+      ]);
+
+      $business = Business::where('slug', $slug)->first();
+
+      if($business) {
+        $review = Review::create([
+          'user_id' => \Auth::user()->id,
+          'business_id' => $business->id,
+          'content' => $request->request,
+          'rating' => $request->rating,
+          'slug' => generate_slug()
+        ]);
+      }
+      else {
+        abort(404);
+      }
+    }
+
+    public function edit () {}
 }

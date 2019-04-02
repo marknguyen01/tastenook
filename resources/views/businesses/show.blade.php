@@ -112,10 +112,10 @@
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-auto posts__avatar text-center">
-                            <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}" class="d-block">
-                                <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}" class="img-fluid rounded">
+                            <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="d-block">
+                                <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="img-fluid rounded">
                             </a>
-                            <h4>{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}</h4>
+                            <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}</h4>
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="posts__date">{{ time_elapsed_string($review->created_at) }}</div>
