@@ -29,7 +29,7 @@ function time_elapsed_string($datetime, $full = false) {
 }
 
 function generate_slug($string) {
-
+  return Str::slug($string . uniqid(), '-');
 }
 
 function address_to_geo($address) {
