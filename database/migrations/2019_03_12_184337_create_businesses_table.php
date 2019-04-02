@@ -32,7 +32,7 @@ class CreateBusinessesTable extends Migration
             $table->unsignedDecimal('lng')->default(0);
             $table->unsignedDecimal('lat')->default(0);
 
-            $table->double('vote_avg', 2, 1)->default(0);
+            $table->double('rating_avg', 2, 1)->default(0);
 
             // Stats
             $table->integer('vote_count')->default(0);

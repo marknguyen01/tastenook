@@ -17,7 +17,9 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->longText('content');
-            $table->integer('user_id');
+            $table->integer('rating')->default(1);
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('business_id')->references('id')->on('businesses');
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
-function generate_slug($string) {
+function generate_slug($string = '') {
   return Str::slug($string . uniqid(), '-');
 }
 
