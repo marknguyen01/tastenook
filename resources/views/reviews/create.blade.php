@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <h3 class="my-5">Create a review for {{ $business->name }}</h3>
+  <h3 class="my-3 my-lg-5">Create a review for {{ $business->name }}</h3>
   {!! Form::open(['route' => ['review.store', $business->slug], 'method' => 'POST']) !!}
   {!! csrf_field() !!}
   <div class="form-group has-feedback {{ $errors->has('rating') ? ' has-error ' : '' }}">
