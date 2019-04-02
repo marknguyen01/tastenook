@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Str;
+
 function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
     $ago = new DateTime($datetime);
