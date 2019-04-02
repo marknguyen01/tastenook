@@ -26,11 +26,10 @@
                     <h1>{{ $business->name }}</h1>
                 </div>
                 <div class="profile__rating">
-                    <h2>@for($i = 0; $i < round($business->vote_avg, 0); $i++)
+                    <h2>@for($i = 0; $i < round($business->rating_avg, 0); $i++)
                         <i class="fas fa-star"></i>
                     @endfor
-
-                    @for($i = 0; $i < (5 - round($business->vote_avg, 0)); $i++)
+                    @for($i = 0; $i < (5 - round($business->rating_avg, 0)); $i++)
                         <i class="far fa-star"></i>
                     @endfor</h2>
                 </div>
@@ -109,23 +108,25 @@
         <div class="profile__reviews">
             <ul class="list-group mt-3">
                 <h3 class="list-group-item p-3">Reviews</h3>
+                @foreach ($reviews as $review)
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-auto posts__avatar text-center">
-                            <a href="/b/{{ $business->slug }}" alt="{{ $business->name }}" class="d-block">
-                                <img src="{{ asset($business->avatar) }}" alt="{{ $business->name }}" class="img-fluid rounded">
+                            <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}" class="d-block">
+                                <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}" class="img-fluid rounded">
                             </a>
-                            <h4>{{ $business->name }}</h4>
+                            <h4>{{ $review->user->first_name . ' ' . substr($review->user->last_name, 1) }}</h4>
                         </div>
                         <div class="col-md-8 col-sm-12">
-                            <div class="posts__date">Posted 4 days ago</div>
-                            <div class="posts__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                            <div class="posts__date">{{ time_elapsed_string($review->created_at) }}</div>
+                            <div class="posts__content">{{ $review->content }}</div>
                             <div class="posts__actions mt-2">
                                 @include('businesses/profile-actions')
                             </div>
                         </div>
                     </div>
                 </li>
+                @endforeach
             </ul>
         </div>
     </div>

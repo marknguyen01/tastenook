@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Business;
+use App\Models\Review;
 
 class BusinessController extends Controller
 {
@@ -11,6 +12,9 @@ class BusinessController extends Controller
       $business = Business::where('slug', $slug)->first();
 
       if($business) {
+        // Query Reviews
+        $reviews = Review::where('business_id', $business->id)->get();
+
         $business->increment('view_count', 1);
         // Format phone number
         $phone = $business->phone_number;
@@ -20,7 +24,10 @@ class BusinessController extends Controller
         $business->address = $business->street_address . ' '
         . $business->city . ', '. $business->state . ' ' . $business->zip_code;
 
-        return view('businesses/show', ['business' => $business]);
+        return view('businesses/show', [
+          'business' => $business,
+          'reviews' => $reviews
+        ]);
 
       }
       else {
