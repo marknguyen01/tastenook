@@ -27,3 +27,20 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+function generate_slug($string) {
+
+}
+
+function address_to_geo($address) {
+  $geocode= file_get_contents('https://maps.google.com/maps/api/geocode/json?key=' . config("settings.googleMapsAPIKey") . '&address='. urlencode($address) . '&sensor=false');
+  $output= json_decode($geocode);
+  return [
+    'lat' => $output->results[0]->geometry->location->lat,
+    'lng' => $output->results[0]->geometry->location->lng,
+  ];
+}
+
+function format_address($street, $city, $state, $zip) {
+  return $street . ' ' . $city . ', '. $state . ' ' . $zip;
+}

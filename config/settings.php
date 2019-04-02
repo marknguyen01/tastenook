@@ -63,14 +63,9 @@ return [
     'reCaptchSecret' => env('RE_CAP_SECRET', 'YOURGOOGLECAPTCHAsecretHERE'),
 
     /*
-     * Google Maps API V3 Status
-     */
-    'googleMapsAPIStatus' => env('GOOGLEMAPS_API_STATUS', false),
-
-    /*
      * Google Maps API Key
      */
-    'googleMapsAPIKey'    => env('GOOGLEMAPS_API_KEY', 'YOURGOOGLEMAPSkeyHERE'),
+    'googleMapsAPIKey'    => env('GOOGLEMAPS_API_KEY', 'AIzaSyCDS81L_9IA13cq25Ihd2GfVhl9fvv1kP8'),
 
     /*
      * DropZone CDN

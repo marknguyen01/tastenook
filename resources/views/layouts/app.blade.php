@@ -78,9 +78,6 @@
     {{-- Scripts --}}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="{{ mix('/js/app.js') }}" type="text/javascript"></script>
-    @if(config('settings.googleMapsAPIStatus'))
-        {!! HTML::script('//maps.googleapis.com/maps/api/js?key='.config("settings.googleMapsAPIKey").'&libraries=places&dummy=.js', array('type' => 'text/javascript')) !!}
-    @endif
     @yield('footer_scripts')
 
 

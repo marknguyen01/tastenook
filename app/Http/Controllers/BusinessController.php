@@ -19,7 +19,9 @@ class BusinessController extends Controller
         // Format address
         $business->address = $business->street_address . ' '
         . $business->city . ', '. $business->state . ' ' . $business->zip_code;
+
         return view('businesses/show', ['business' => $business]);
+
       }
       else {
         abort(404);

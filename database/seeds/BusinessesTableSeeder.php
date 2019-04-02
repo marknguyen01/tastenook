@@ -25,6 +25,15 @@ class BusinessesTableSeeder extends Seeder
         'phone_number' => '7045839274',
         'vote_avg'  => '3.4',
       ]);
+
+      $address = format_address($business->street_address, $business->city,
+      $business->state, $business->zip_code);
+
+      $geopoints = address_to_geo($address);
+
+      $business->lat = $geopoints['lat'] != null ? $geopoints['lat'] : 0;
+      $business->lng =  $geopoints['lng'] != null ? $geopoints['lng'] : 0;
+
       // Generate placholder images
       $op = 'public/images/businesses/faker_images/';
       $dp = 'public/images/businesses/profile/' . $business->slug;

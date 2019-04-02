@@ -15,6 +15,7 @@ class WelcomeController extends Controller
     {
         $newBusinesses = Business::orderBy('created_at')->limit(3)->get();
         $hotBusinesses = Business::orderBy('view_count')->limit(3)->get();
+
         if($newBusinesses || $hotBusinesses)
             return view('welcome', ['newBusinesses' => $newBusinesses, 'hotBusinesses' => $hotBusinesses]);
         else abort(500);

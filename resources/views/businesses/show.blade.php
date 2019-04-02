@@ -35,9 +35,13 @@
                     @endfor</h2>
                 </div>
                 <div class="btn-group profile__action" role="group" aria-label="Basic example">
+                @auth
                   <button type="button" class="btn btn-danger p-2">Leave a review</button>
-                  <button type="button" class="btn btn-secondary">Follow</button>
-                  <button type="button" class="btn btn-secondary">Message</button>
+                  <button type="button" class="btn btn-outline-secondary">Follow</button>
+                  <button type="button" class="btn btn-outline-secondary">Message</button>
+                @else
+                    <button type="button" class="btn btn-outline-secondary">Share</button>
+                @endauth
                 </div>
                 <div class="profile__maps mt-3">
                   <div id="map" class="h-100"></div>
@@ -130,7 +134,13 @@
 
 
 @section('footer_scripts')
+<script type="text/javascript">
+var geopoints = {
+  lat: {{ $business->lat }},
+  lng: {{ $business->lng }}
+}
+</script>
 <script src="{{ asset('js/business.js') }}" type="text/javascript"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDS81L_9IA13cq25Ihd2GfVhl9fvv1kP8&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config("settings.googleMapsAPIKey") }}&callback=initMap"></script>
 
 @endsection

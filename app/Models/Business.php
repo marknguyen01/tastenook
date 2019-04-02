@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Business extends Model
 {
     protected $guarded = [
-      'id',
+      'id'
     ];
 
     public function users() {

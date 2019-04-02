@@ -26,6 +26,10 @@ class CreateBusinessesTable extends Migration
             $table->string('zip_code', 5);
             $table->string('phone_number', 10);
 
+            // Business Geopoint
+            $table->unsignedDecimal('lng')->default(0);
+            $table->unsignedDecimal('lat')->default(0);
+
             $table->double('vote_avg', 2, 1)->default(0);
 
             // Stats

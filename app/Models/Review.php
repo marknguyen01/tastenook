@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Jcc\LaravelVote\CanBeVoted;
+
 
 class Review extends Model
 {
     use CanBeVoted;
-      
+
     protected $vote = App\Models\User::class;
     protected $guarded = ['id'];
 
