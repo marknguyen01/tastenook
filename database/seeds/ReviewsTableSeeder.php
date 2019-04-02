@@ -30,7 +30,9 @@ class ReviewsTableSeeder extends Seeder
       ]);
 
       $business = Business::find(1);
-      $business->rating_avg = ($review1->rating + $review2->rating) / 2;
+      $business->review_count = 2;
+      $business->rating_count = 2;
+      $business->rating_avg = ($review1->rating + $review2->rating) / $business->rating_count;
 
 
       $review1->save();

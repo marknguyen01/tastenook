@@ -62,7 +62,7 @@
                           </li>
                           <li class="list-group-item">
                               <i class="fas fa-globe"></i>
-                              <a href="https://www.mcdonalds.com/us/en-us.html">https://www.mcdonalds.com/us/en-us.html</a>
+                              <a href="{{ $business->website }}">{{ $business->name }} Website</a>
                           </li>
                         </ul>
                     </div>
