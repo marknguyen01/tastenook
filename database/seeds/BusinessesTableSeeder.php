@@ -24,7 +24,6 @@ class BusinessesTableSeeder extends Seeder
         'zip_code'  =>  '28273',
         'phone_number' => '7045839274',
         'website' => 'https://www.mcdonalds.com/us/en-us.html',
-        'vote_avg'  => '3.4',
       ]);
 
       $address = format_address($business->street_address, $business->city,

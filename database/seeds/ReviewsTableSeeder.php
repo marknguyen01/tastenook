@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Review;
+use App\Models\Business;
 
 class ReviewsTableSeeder extends Seeder
 {
@@ -29,5 +30,8 @@ class ReviewsTableSeeder extends Seeder
         'business_id' => 1,
       ]);
       $review2->save();
+
+      $business = Business::find(1);
+      $business->rating_avg = ($review1->rating + $review2->rating) / 2;
     }
 }

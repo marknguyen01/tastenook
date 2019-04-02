@@ -18,9 +18,12 @@ class CreateReviewsTable extends Migration
             $table->string('slug');
             $table->longText('content');
             $table->integer('rating')->default(1);
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('business_id');
+            $table->timestamps();
+
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('business_id')->references('id')->on('businesses');
-            $table->timestamps();
         });
     }
 
