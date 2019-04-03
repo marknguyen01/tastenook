@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', $seededAdminEmail)->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => Str::slug($faker->firstName . ($faker->lastName)[0] . uniqid(), '-'),
+                'name'                           => strtolower(generate_slug($faker->firstName . ($faker->lastName)[0])),
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
                 'email'                          => $seededAdminEmail,
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', 'user@user.com')->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => Str::slug($faker->firstName . ($faker->lastName)[0] . uniqid(), '-'),
+                'name'                           => strtolower(generate_slug($faker->firstName . ($faker->lastName)[0])),
                 'first_name'                     => $faker->firstName,
                 'last_name'                      => $faker->lastName,
                 'email'                          => 'user@user.com',

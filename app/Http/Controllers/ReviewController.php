@@ -49,7 +49,10 @@ class ReviewController extends Controller
         }
       }
       else {
-        return \Redirect::back()->withErrors(['You have already reviewed this business']);
+        return \Redirect::back()->withErrors([
+          'You have already reviewed this business!',
+          'You can update or delete your review.'
+        ]);
       }
     }
     else {
