@@ -2,10 +2,10 @@
 
 use App\Models\Profile;
 use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Models\Role;
+use jeremykenedy\LaravelRoles\Models\Permission;
 
 class UsersTableSeeder extends Seeder
 {
