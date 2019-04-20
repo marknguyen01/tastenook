@@ -9,18 +9,6 @@ use App\Models\Business;
 
 class ReviewController extends Controller
 {
-  public function create($slug) {
-    $business = Business::where('slug', $slug)->first();
-    if($business) {
-      return view('reviews.create', [
-        'business' => $business
-      ]);
-    }
-    else {
-      abort(404);
-    }
-  }
-
   public function store(Request $request, $slug) {
     $validatedData = $request->validate([
       'content' => 'required',
@@ -39,7 +27,7 @@ class ReviewController extends Controller
         $review = Review::create([
           'user_id' => $user->id,
           'business_id' => $business->id,
-          'content' => $request->request,
+          'content' => $request->content,
           'rating' => $request->rating,
           'slug' => generate_slug()
         ]);
@@ -57,6 +45,29 @@ class ReviewController extends Controller
     }
     else {
       abort(404);
+    }
+  }
+
+  public function update(Request $request, $slug) {
+    $business = Business::where('slug', $slug)->first();
+    try {
+      $review = Review::where([
+        ['business_id', $business->id],
+        ['user_id', \Auth::user()->id],
+      ])->first()->update([
+        'content' => $request->content,
+        'rating' => $request->rating
+      ]);
+
+      if($review > 0) {
+        return redirect('/b/' . $slug)->with('success', 'Your review has been updated');
+      }
+      else {
+        return redirect('/b/' . $slug)->with('error', 'Something went wrong! Your review has not been updated');
+      }
+    }
+    catch (\Illuminate\Database\QueryException $e) {
+      return redirect('/b/' . $slug)->with('error', 'Something went wrong! Please try again');
     }
   }
 

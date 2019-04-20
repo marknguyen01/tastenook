@@ -11794,6 +11794,14 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.form-status {
+  width: 50vw;
+  top: 10vh;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -17320,6 +17328,16 @@ a:hover {
   border-radius: 3px;
 }
 
+.profile {
+  margin-top: -1rem;
+}
+
+@media (min-width: 992px) {
+  .profile {
+    margin-top: -3rem;
+  }
+}
+
 .profile__title h1 {
   display: inline-block;
 }
@@ -17336,5 +17354,48 @@ a:hover {
 
 .profile__maps {
   height: 30vh;
+}
+
+.posts__avatar img {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #7f8187;
+}
+
+.form__rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  width: 100%;
+}
+
+.form__rating input {
+  position: absolute;
+  left: -999999px;
+}
+
+.form__rating label {
+  display: inline-block;
+  font-size: 0;
+}
+
+.form__rating > label:before {
+  position: relative;
+  font: 24px/1 FontAwesome;
+  display: block;
+  content: "\F005";
+  color: #ccc;
+  background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form__rating > label:hover:before,
+.form__rating > label:hover ~ .form__rating > label:before,
+.form__rating > label.selected:before,
+.form__rating > label.selected ~ .form__rating > label:before {
+  color: #f0ad4e;
+  background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 

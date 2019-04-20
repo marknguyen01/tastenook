@@ -14,20 +14,29 @@ class BusinessController extends Controller
       if($business) {
         // Query Reviews
         $reviews = Review::where('business_id', $business->id)->get();
-
         $business->increment('view_count', 1);
         // Format phone number
         $phone = $business->phone_number;
         $business->phone_number =  "(".substr($phone, 0, 3).")-".substr($phone, 3, 3)."-".substr($phone,6);
-
         // Format address
         $business->address = $business->street_address . ' '
         . $business->city . ', '. $business->state . ' ' . $business->zip_code;
-
-        return view('businesses/show', [
+        // Data array
+        $arr = [
           'business' => $business,
           'reviews' => $reviews
-        ]);
+        ];
+
+        if(\Auth::user()) {
+          $user_review = Review::where([
+            ['business_id', $business->id],
+            ['user_id', \Auth::user()->id],
+          ])->first();
+          $arr['user_review'] = $user_review;
+        }
+
+
+        return view('businesses/show', $arr);
 
       }
       else {

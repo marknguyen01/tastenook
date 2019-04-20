@@ -36,9 +36,9 @@
                 <div class="btn-group profile__action" role="group" aria-label="Basic example">
                 @auth
                   @allowed('review.businesses', $business)
-                    <a href="{{ route('review.create', $business->slug) }}" class="btn btn-danger p-2">Leave a review</a>
+                    <a href="#reviews__form" class="btn btn-danger py-2">Leave a review</a>
                   @else
-                    <a href="{{ route('review.edit', $business->slug) }}" class="btn btn-danger p-2">Edit your review</a>
+                    <a href="#reviews__form" class="btn btn-danger py-2">Leave a review</a>
                   @endallowed
                   <button type="button" class="btn btn-outline-secondary">Follow</button>
                   <button type="button" class="btn btn-outline-secondary">Message</button>
@@ -92,14 +92,14 @@
                 <h3 class="list-group-item p-3">Owner's Posts</h3>
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-auto posts__avatar text-center">
+                      <div class="col-md-4 col-lg-2 col-sm-12 posts__avatar text-center">
                             <a href="/b/{{ $business->slug }}" alt="{{ $business->name }}" class="d-block">
                                 <img src="{{ asset($business->avatar) }}" alt="{{ $business->name }}" class="img-fluid rounded">
+                                <h4>{{ $business->name }}</h4>
                             </a>
-                            <h4>{{ $business->name }}</h4>
                         </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="posts__date">Posted 4 days ago</div>
+                        <div class="col-md-8 col-lg-10 col-sm-12">
+                              <div class="posts__date">Posted 4 days ago</div>
                             <div class="posts__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                             <div class="posts__actions mt-2">
                                 @include('businesses/profile-actions')
@@ -111,20 +111,36 @@
         </div>
         <div class="profile__reviews">
             <ul class="list-group mt-3">
-                <h3 class="list-group-item p-3">Reviews</h3>
+                <li class="list-group-item p-3">
+                  <h3>Reviews</h3>
+                  @auth
+                    @include('reviews/create')
+                  @else
+                    Please <a href="/login">login</a> to leave a review
+                  @endauth
+                </li>
                 @foreach ($reviews as $review)
                 <li class="list-group-item">
                     <div class="row">
-                        <div class="col-auto posts__avatar text-center">
+                        <div class="col-md-4 col-lg-2 col-sm-12 posts__avatar text-center">
                             <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="d-block">
                                 <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="img-fluid rounded">
+                                <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] . '.' }}</h4>
                             </a>
-                            <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}</h4>
                         </div>
-                        <div class="col-md-8 col-sm-12">
-                            <div class="posts__date">{{ time_elapsed_string($review->created_at) }}</div>
-                            <div class="posts__content">{{ $review->content }}</div>
-                            <div class="posts__actions mt-2">
+                        <div class="col-md-8 col-lg-10 col-sm-12">
+                            <div class="reviews__rating">
+                              @for($i = 0; $i < $review->rating; $i++)
+                                  <i class="fas fa-star"></i>
+                              @endfor
+
+                              @for($i = 0; $i < (5 - $review->rating); $i++)
+                                  <i class="far fa-star"></i>
+                              @endfor
+                            </div>
+                            <div class="reviews__date">{{ time_elapsed_string($review->created_at) }}</div>
+                            <div class="reviews__content">{{ $review->content }}</div>
+                            <div class="reviews__actions mt-2">
                                 @include('businesses/profile-actions')
                             </div>
                         </div>
@@ -147,5 +163,11 @@ var geopoints = {
 </script>
 <script src="{{ asset('js/business.js') }}" type="text/javascript"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config("settings.googleMapsAPIKey") }}&callback=initMap"></script>
-
+<script type="text/javascript">
+$('.form__rating input').change(function () {
+  var $radio = $(this);
+  $('.form__rating .selected').removeClass('selected');
+  $radio.closest('label').addClass('selected');
+});
+</script>
 @endsection
