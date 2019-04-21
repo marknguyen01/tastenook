@@ -33,7 +33,7 @@
                   @allowed('review.businesses', $user_review)
                     <a href="#reviews__form" class="btn btn-danger py-2">Edit your review</a>
                   @else
-                    <a href="#reviews__form" class="btn btn-danger py-2">Leave a review</a>
+                    <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a>
                   @endallowed
                   <button type="button" class="btn btn-outline-secondary">Follow</button>
                   <button type="button" class="btn btn-outline-secondary">Message</button>
@@ -82,6 +82,12 @@
                 </div>
             </div>
         </div>
+        @allowed('edit.businesses', $business)
+        <div class="profile__admin my-3">
+          <a href="/b/{{ $business->slug }}/edit" class="btn btn-outline-success">Edit your business</a>
+          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-outline-success">Create coupons</a>
+        </div>
+        @endallowed
         <div class="profile__posts">
             <ul class="list-group mt-3">
                 <h3 class="list-group-item p-3">Owner's Posts</h3>

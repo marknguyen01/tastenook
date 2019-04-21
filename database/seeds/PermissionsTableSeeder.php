@@ -62,5 +62,14 @@ class PermissionsTableSeeder extends Seeder
                 'model'       => 'App\Models\Review',
             ]);
         }
+
+        if (Permission::where('name', '=', 'Can Edit Businesses')->first() === null) {
+            Permission::create([
+                'name'        => 'Can Edit Businesses',
+                'slug'        => 'edit.businesses',
+                'description' => 'Can edit businesses',
+                'model'       => 'App\Models\Business',
+            ]);
+        }
     }
 }

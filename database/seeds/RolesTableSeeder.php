@@ -3,6 +3,7 @@
 use App\User;
 use Illuminate\Database\Seeder;
 use jeremykenedy\LaravelRoles\Models\Role;
+use jeremykenedy\LaravelRoles\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
@@ -24,6 +25,26 @@ class RolesTableSeeder extends Seeder
                 'description' => 'Admin Role',
                 'level'       => 5,
             ]);
+        }
+
+        if (Role::where('slug', '=', 'mod')->first() === null) {
+            $modRole = Role::create([
+                'name'        => 'Moderator',
+                'slug'        => 'mod',
+                'description' => 'Moderator Role',
+                'level'       => 4,
+            ]);
+        }
+
+        if (Role::where('slug', '=', 'owner')->first() === null) {
+            $ownerRole = Role::create([
+                'name'        => 'Business Owner',
+                'slug'        => 'owner',
+                'description' => 'Business Owner Role',
+                'level'       => 3,
+            ]);
+            $editBizPerm = Permission::where('slug', 'edit.businesses')->first();
+            $ownerRole->attachPermission($editBizPerm);
         }
 
         if (Role::where('slug', '=', 'user')->first() === null) {
