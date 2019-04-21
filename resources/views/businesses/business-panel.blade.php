@@ -4,14 +4,8 @@
             <h4><a href="/b/{{ $business->slug }}" alt="{{ $business-> name}}">
             {{ $business->name }}
             </a></h4>
-            <div class="business-rating">
-                @for($i = 0; $i < round($business->rating_avg, 0); $i++)
-                    <i class="fas fa-star"></i>
-                @endfor
-
-                @for($i = 0; $i < (5 - round($business->rating_avg, 0)); $i++)
-                    <i class="far fa-star"></i>
-                @endfor
+            <div class="business-rating rating">
+                @include('partials/rating', ['rating' => $business->rating_avg])
             </div>
             <span class="business-status">Open {{ time_elapsed_string($business->created_at) }}</span>
             <div class="business-stats">

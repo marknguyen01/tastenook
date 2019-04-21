@@ -17297,7 +17297,7 @@ div[data-toggle="buttons"] label.active {
 }
 
 .rating__wrap .stars--inactive {
-  color: grey;
+  color: #7f8187;
   position: absolute;
   top: 0;
   left: 0;
@@ -17324,7 +17324,7 @@ div[data-toggle="buttons"] label.active {
   float: right;
   padding-left: 2px;
   cursor: pointer;
-  color: #FFB300;
+  color: #EEBD01;
 }
 
 .form-rating__ico:last-child {
