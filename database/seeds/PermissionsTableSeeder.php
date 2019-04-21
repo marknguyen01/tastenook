@@ -59,7 +59,7 @@ class PermissionsTableSeeder extends Seeder
                 'name'        => 'Can Review Businesses',
                 'slug'        => 'review.businesses',
                 'description' => 'Can review businesses',
-                'model'       => 'App\Models\Business',
+                'model'       => 'App\Models\Review',
             ]);
         }
     }

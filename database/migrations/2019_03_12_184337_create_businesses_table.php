@@ -35,7 +35,6 @@ class CreateBusinessesTable extends Migration
             $table->double('rating_avg', 2, 1)->default(0);
 
             // Stats
-            $table->integer('rating_count')->default(0);
             $table->integer('view_count')->default(0);
             $table->integer('review_count')->default(0);
 

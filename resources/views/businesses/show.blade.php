@@ -25,18 +25,13 @@
                 <div class="profile__title ">
                     <h1>{{ $business->name }}</h1>
                 </div>
-                <div class="profile__rating">
-                    <h2>@for($i = 0; $i < round($business->rating_avg, 0); $i++)
-                        <i class="fas fa-star"></i>
-                    @endfor
-                    @for($i = 0; $i < (5 - round($business->rating_avg, 0)); $i++)
-                        <i class="far fa-star"></i>
-                    @endfor</h2>
+                <div class="profile__rating rating">
+                    @include('partials/rating', ['rating' => $business->rating_avg])
                 </div>
                 <div class="btn-group profile__action" role="group" aria-label="Basic example">
                 @auth
-                  @allowed('review.businesses', $business)
-                    <a href="#reviews__form" class="btn btn-danger py-2">Leave a review</a>
+                  @allowed('review.businesses', $user_review)
+                    <a href="#reviews__form" class="btn btn-danger py-2">Edit your review</a>
                   @else
                     <a href="#reviews__form" class="btn btn-danger py-2">Leave a review</a>
                   @endallowed
@@ -90,9 +85,9 @@
         <div class="profile__posts">
             <ul class="list-group mt-3">
                 <h3 class="list-group-item p-3">Owner's Posts</h3>
-                <li class="list-group-item">
+                <li class="list-group-item post">
                     <div class="row">
-                      <div class="col-md-4 col-lg-2 col-sm-12 posts__avatar text-center">
+                      <div class="col-md-4 col-lg-2 col-sm-12 post__avatar text-center">
                             <a href="/b/{{ $business->slug }}" alt="{{ $business->name }}" class="d-block">
                                 <img src="{{ asset($business->avatar) }}" alt="{{ $business->name }}" class="img-fluid rounded">
                                 <h4>{{ $business->name }}</h4>
@@ -120,23 +115,17 @@
                   @endauth
                 </li>
                 @foreach ($reviews as $review)
-                <li class="list-group-item">
+                <li class="list-group-item review">
                     <div class="row">
-                        <div class="col-md-4 col-lg-2 col-sm-12 posts__avatar text-center">
+                        <div class="col-md-4 col-lg-2 col-sm-12 review__avatar text-center">
                             <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="d-block">
                                 <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="img-fluid rounded">
                                 <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] . '.' }}</h4>
                             </a>
                         </div>
                         <div class="col-md-8 col-lg-10 col-sm-12">
-                            <div class="reviews__rating">
-                              @for($i = 0; $i < $review->rating; $i++)
-                                  <i class="fas fa-star"></i>
-                              @endfor
-
-                              @for($i = 0; $i < (5 - $review->rating); $i++)
-                                  <i class="far fa-star"></i>
-                              @endfor
+                            <div class="review__rating rating">
+                                @include('partials/rating', ['rating' => $review->rating])
                             </div>
                             <div class="reviews__date">{{ time_elapsed_string($review->created_at) }}</div>
                             <div class="reviews__content">{{ $review->content }}</div>
@@ -163,11 +152,4 @@ var geopoints = {
 </script>
 <script src="{{ asset('js/business.js') }}" type="text/javascript"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ config("settings.googleMapsAPIKey") }}&callback=initMap"></script>
-<script type="text/javascript">
-$('.form__rating input').change(function () {
-  var $radio = $(this);
-  $('.form__rating .selected').removeClass('selected');
-  $radio.closest('label').addClass('selected');
-});
-</script>
 @endsection

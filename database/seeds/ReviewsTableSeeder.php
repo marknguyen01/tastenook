@@ -24,15 +24,14 @@ class ReviewsTableSeeder extends Seeder
       $review2 = Review::create([
         'slug' => generate_slug(),
         'content' => "It's ok",
-        'rating' => 3,
+        'rating' => 2,
         'user_id' => 2,
         'business_id' => 1,
       ]);
 
       $business = Business::find(1);
       $business->review_count = 2;
-      $business->rating_count = 2;
-      $business->rating_avg = ($review1->rating + $review2->rating) / $business->rating_count;
+      $business->rating_avg = ($review1->rating + $review2->rating) / $business->review_count;
 
 
       $review1->save();

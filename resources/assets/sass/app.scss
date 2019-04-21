@@ -20,6 +20,8 @@
   transform: translateX(-50%);
 }
 
+
+
 // Font Awesome
 @import '~font-awesome/scss/font-awesome';
 
@@ -51,5 +53,6 @@
 @import "navbar";
 
 @import "rating";
+@import "formRating";
 /* Business */
 @import "business";

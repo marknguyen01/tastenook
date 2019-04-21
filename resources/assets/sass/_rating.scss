@@ -1,36 +1,62 @@
+/* Star rating ------------------- */
 .rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    width: 100%;
-}
-
-.rating input {
-    position: absolute;
-    left: -999999px;
-}
-
-.rating label {
-    display: inline-block;
-    font-size: 0;
-}
-
-.rating > label:before {
-    position: relative;
-    font: 24px/1 FontAwesome;
     display: block;
-    content: "\f005";
-    color: #ccc;
-    background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 16px;
+    position: relative;
+    overflow: hidden;
+    &__wrap {
+        display: inline-block;
+        position: relative;
+        height: 19px;
+
+        .stars--active {
+            color: #EEBD01;
+            position: relative;
+            z-index: 10;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .stars--inactive {
+            color: grey;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-text-stroke: initial;
+            /* overflow: hidden; */
+        }
+    }
 }
 
-.rating > label:hover:before,
-.rating > label:hover ~ label:before,
-.rating > label.selected:before,
-.rating > label.selected ~ label:before {
-    color: #f0ad4e;
-    background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.form-rating{
+	font-size: 0;
+    &__wrap {
+    	display: inline-block;
+    	font-size: 1rem;
+        &:after{
+        	content: "";
+        	display: table;
+        	clear: both;
+        }
+    }
+    &__ico {
+    	float: right;
+    	padding-left: 2px;
+    	cursor: pointer;
+    	color: #FFB300;
+
+        &:last-child{
+            padding-left: 0;
+        }
+    }
+    &__input {
+        display: none;
+    }
+    &__ico:hover:before,
+    &__ico:hover ~ &__ico:before,
+    &__input:checked ~ &__ico:before
+    {
+    	content: "\f005";
+    }
 }

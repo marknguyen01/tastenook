@@ -54,12 +54,20 @@ class ReviewController extends Controller
       $review = Review::where([
         ['business_id', $business->id],
         ['user_id', \Auth::user()->id],
-      ])->first()->update([
+      ])->first();
+
+      $total_vote = ($business->rating_avg * $business->review_count) - $review->rating;
+
+      $updatedBusiness = $business->update([
+          'rating_avg' => ($total_vote + $request->rating) / $business->review_count
+      ]);
+
+      $updatedReview = $review->update([
         'content' => $request->content,
         'rating' => $request->rating
       ]);
 
-      if($review > 0) {
+      if($updatedReview > 0 && $updatedBusiness > 0) {
         return redirect('/b/' . $slug)->with('success', 'Your review has been updated');
       }
       else {

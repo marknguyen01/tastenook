@@ -4,10 +4,12 @@
 a {
     color: $text-accent-color;
 
-    &:active, &:hover {
+    &:active,
+    &:hover {
         text-decoration: none;
     }
 }
+
 .carousel-slide {
     &__control {
         position: relative;
@@ -18,71 +20,43 @@ a {
     }
 }
 
-
 .profile {
-  margin-top: -1rem;
-  @include media-breakpoint-up(lg) {
-    margin-top: -3rem;
-  }
+    margin-top: -1rem;
+    @include media-breakpoint-up(lg) {
+        margin-top: -3rem;
+    }
+
     &__title {
         h1 {
             display: inline-block;
         }
+
         i {
             font-size: 2.25rem;
             margin-left: 5px;
             color: $red;
         }
     }
+
     &__rating {
-        i {
-            color: $green;
-        }
+        font-size: $h3-font-size;
     }
+
     &__maps {
-      height: 30vh;
+        height: 30vh;
     }
 }
 
-.posts__avatar {
-  img {
-    width: 75px;
-    height: 75px;
-    border: 1px solid $text-accent-color;
-  }
+.post__avatar {
+    img {
+        width: 75px;
+        height: 75px;
+        border: 1px solid $text-accent-color;
+    }
 }
 
-.form__rating {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-    width: 100%;
-    input {
-        position: absolute;
-        left: -999999px;
-    }
-    label {
-        display: inline-block;
-        font-size: 0;
-    }
-    > label {
-      &:before {
-          position: relative;
-          font: 24px/1 FontAwesome;
-          display: block;
-          content: "\f005";
-          color: #ccc;
-          background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-      }
-      &:hover:before,
-      &:hover ~ &:before,
-      &.selected:before,
-      &.selected ~ &:before {
-          color: #f0ad4e;
-          background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-      }
+.review {
+    &__avatar {
+        @extend .post__avatar;
     }
 }

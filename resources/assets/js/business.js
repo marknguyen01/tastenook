@@ -8,3 +8,8 @@ window.initMap = function() {
   });
   var marker = new google.maps.Marker({position: geopoints, map: map});
 }
+$('.form__rating input').change(function () {
+  var $radio = $(this);
+  $('.form__rating .selected').removeClass('selected');
+  $radio.closest('label').addClass('selected');
+});
