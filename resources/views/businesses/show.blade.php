@@ -65,27 +65,31 @@
                           </li>
                         </ul>
                     </div>
+                    @if($coupons)
                     <div class="col-12 mt-3">
                         <ul class="list-group">
+                          @foreach($coupons as $coupon)
                           <li class="list-group-item">
-                              20% off on one burger
-                               <span class="badge badge-danger badge-pill">HOT</span>
-                               <span class="badge badge-success badge-pill">NEW</span>
-
+                              <p>
+                                  {{ $coupon->name }}
+                                   <span class="badge badge-danger badge-pill">expires in {{ time_left_string($coupon->expired_at) }}</span>
+                               </p>
+                              <p><strong>{{ $coupon->code }}</strong></p>
+                              @if($coupon->description)
+                                  <p><small>*{{ $coupon->description }}</small></p>
+                              @endif
                           </li>
-                          <li class="list-group-item">
-                              10% on any combo
-                              <span class="badge badge-danger badge-pill">HOT</span>
-                          </li>
+                          @endforeach
                         </ul>
                     </div>
+                @endif
                 </div>
             </div>
         </div>
         @allowed('edit.businesses', $business)
         <div class="profile__admin my-3">
-          <a href="/b/{{ $business->slug }}/edit" class="btn btn-outline-success">Edit your business</a>
-          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-outline-success">Create coupons</a>
+          <a href="/b/{{ $business->slug }}/edit" class="btn btn-outline-success">Manage your business</a>
+          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-outline-success">Manage coupons</a>
         </div>
         @endallowed
         <div class="profile__posts">
@@ -115,7 +119,7 @@
                 <li class="list-group-item p-3">
                   <h3>Reviews</h3>
                   @auth
-                    @include('reviews/create')
+                    @include('businesses/create-review')
                   @else
                     Please <a href="/login">login</a> to leave a review
                   @endauth

@@ -17,4 +17,8 @@ class Business extends Model
     public function reviews() {
       return $this->hasMany('App\Models\Review');
     }
+
+    public function coupons() {
+        return $this->hasMany('App\Models\Coupon');
+    }
 }

@@ -35,6 +35,8 @@ Route::group(['middleware' => ['web', 'activity']], function () {
 
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    Route::get('/b/{slug}', ['as' => 'business.show', 'uses' => 'BusinessController@show']);
 });
 
 // Registered and Activated User Routes
@@ -65,8 +67,14 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
       Route::post('/review/update', ['as' => 'review.update', 'uses' => 'ReviewController@update']);
     });
 
-
-
+    Route::group(['middleware' => ['level:3', 'permission:edit.businesses']], function() {
+        Route::prefix('/b/{slug}')->group(function() {
+          Route::get('/edit', ['as' => 'business.edit', 'uses' => 'BusinessController@edit']);
+          Route::post('/update', ['as' => 'business.update', 'uses' => 'BusinessController@update']);
+          Route::get('/coupon/create', ['as' => 'coupon.create', 'uses' => 'BusinessController@createCoupon']);
+          Route::post('/coupon/update', ['as' => 'coupon.update', 'uses' => 'BusinessController@updateCoupon']);
+        });
+    });
 });
 
 // Registered, activated, and is current user routes.
@@ -137,10 +145,6 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('active-users', 'AdminDetailsController@activeUsers');
 });
 
-// Business route
-Route::resource('b', 'BusinessController', [
-  'only' => ['show'],
-]);
 
 
 Route::redirect('/php', '/phpinfo', 301);

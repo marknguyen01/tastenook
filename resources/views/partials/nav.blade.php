@@ -53,11 +53,7 @@
                 @endrole
             </ul>
             <div class="header__search-bar ml-auto">
-                <!-- TODO: Add route for search form. -->
-                <form method="GET" action="" class="search-form">
-                    <input type="text" name="searchQuery" class="search-form__text-input" placeholder="Search...">
-                    <button type="submit" class="search-form__button bubble-button--icon"><i class="fa fa-search"></i></button>
-                </form>
+                @include('partials/search-bar')
             </div>
             {{-- Right Side Of Navbar --}}
             <ul class="navbar-nav ml-auto">

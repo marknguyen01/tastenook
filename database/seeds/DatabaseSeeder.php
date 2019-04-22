@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ThemesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ReviewsTableSeeder::class);
-
+        $this->call(CouponsTableSeeder::class);
         Model::reguard();
     }
 }

@@ -17377,6 +17377,43 @@ div[data-toggle="buttons"] label.active {
   content: "\F005";
 }
 
+.search-bar input.form-control {
+  border: 1px solid #808187;
+}
+
+.search-bar input.form-control:first-child {
+  width: 30vw;
+  border-right: 0;
+}
+
+.search-bar input.form-control:last-of-type {
+  border-left: 0;
+}
+
+.search-bar input.form-control:hover,
+.search-bar input.form-control:focus {
+  outline: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.search-bar #search-separator {
+  background-color: #fff;
+  border-top: 1px solid #808187;
+  border-bottom: 1px solid #808187;
+}
+
+.search-bar #search-separator span {
+  background-color: #808187;
+  width: 2px;
+  margin: 8px 0;
+}
+
+.search-bar .btn {
+  background-color: #e9342c;
+  color: #fff;
+}
+
 /* Business */
 
 a {
