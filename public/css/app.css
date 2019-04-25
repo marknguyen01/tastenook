@@ -17377,16 +17377,21 @@ div[data-toggle="buttons"] label.active {
   content: "\F005";
 }
 
+.search-bar {
+  min-width: 40vw;
+}
+
 .search-bar input.form-control {
   border: 1px solid #808187;
 }
 
-.search-bar input.form-control:first-child {
-  width: 30vw;
+.search-bar input.form-control[name="search"] {
+  width: calc(70% - 50px);
   border-right: 0;
 }
 
-.search-bar input.form-control:last-of-type {
+.search-bar input.form-control[name="location"] {
+  width: 30%;
   border-left: 0;
 }
 

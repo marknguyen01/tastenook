@@ -1,4 +1,4 @@
-<div class="search-bar">
+<form class="search-bar form-inline my-2 my-lg-0">
     <div class="input-group">
           <input class="form-control py-2" type="search" placeholder="Looking for a restaurant?" name="search">
           <div class="input-group-append" id="search-separator">
@@ -11,4 +11,4 @@
             </button>
           </div>
     </div>
-</div>
+</form>

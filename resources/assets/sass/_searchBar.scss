@@ -1,13 +1,15 @@
 .search-bar {
+    min-width: 40vw;
     input.form-control {
         border: 1px solid lighten($text-color, 20%);
 
-        &:first-child {
-            width: 30vw;
-            border-right: 0
+        &[name="search"] {
+          width: calc(70% - 50px);
+          border-right: 0;
         }
-        &:last-of-type {
-            border-left: 0;
+        &[name="location"] {
+          width: 30%;
+          border-left: 0;
         }
         &:hover, &:focus {
             outline: none;

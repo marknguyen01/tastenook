@@ -8,7 +8,38 @@
             <span class="sr-only">{!! trans('titles.toggleNav') !!}</span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {{-- Left Side Of Navbar --}}
+            <div class="header__search-bar ml-auto">
+                @include('partials/search-bar')
+            </div>
+            {{-- Right Side Of Navbar --}}
+            <ul class="navbar-nav ml-auto">
+                {{-- Authentication Links --}}
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ trans('titles.login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ trans('titles.register') }}</a></li>
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="user-avatar-nav">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
+                                {!! trans('titles.profile') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </ul>
             <ul class="navbar-nav mr-auto">
                 @role('admin')
                     <li class="nav-item dropdown">
@@ -51,38 +82,6 @@
                         </div>
                     </li>
                 @endrole
-            </ul>
-            <div class="header__search-bar ml-auto">
-                @include('partials/search-bar')
-            </div>
-            {{-- Right Side Of Navbar --}}
-            <ul class="navbar-nav ml-auto">
-                {{-- Authentication Links --}}
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ trans('titles.login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ trans('titles.register') }}</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="user-avatar-nav">
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
-                                {!! trans('titles.profile') !!}
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
             </ul>
         </div>
     </div>

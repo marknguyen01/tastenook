@@ -55,41 +55,6 @@ body {
   border-radius: 50%;
 }
 
-#intro .container > .row #search {
-  margin-top: -3rem;
-}
-
-#intro .container > .row #search input.form-control {
-  border: none;
-}
-
-#intro .container > .row #search input.form-control:first-child {
-  width: 30vw;
-}
-
-#intro .container > .row #search input.form-control:hover,
-#intro .container > .row #search input.form-control:focus {
-  outline: none;
-  -webkit-box-shadow: none !important;
-          box-shadow: none !important;
-}
-
-#intro .container > .row #search #search-separator {
-  background-color: #ffffff;
-}
-
-#intro .container > .row #search #search-separator span {
-  background-color: #808187;
-  width: 2px;
-  margin: 8px 0;
-}
-
-#intro .container > .row #search .btn {
-  background-color: #e9342c;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-}
-
 .businesses .business-heading {
   color: #ffffff;
 }
