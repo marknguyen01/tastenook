@@ -19,4 +19,8 @@ class Review extends Model
     public function user() {
       return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+    public function comments() {
+      return $this->morphMany('App\Models\Comment', 'commentable');
+    }
 }
