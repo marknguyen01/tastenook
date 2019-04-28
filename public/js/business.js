@@ -104,13 +104,16 @@ window.UserAction = function () {
   }, {
     key: 'sendRequest',
     value: function sendRequest(el, url) {
-      var _this = this;
-
       var xhttp = new XMLHttpRequest();
+      xhttp.responseType = 'json';
       xhttp.onreadystatechange = function () {
-        if (_this.readyState == 4 && _this.status == 200) {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
           var target = el.querySelector(".action__stats");
-          console.log(el);
+          var json = xhttp.response;
+          var count = parseInt(target.innerText);
+
+          console.log(count);
+          if (json.count_increased) target.innerHTML = count + 1;else target.innerHTML = count - 1;
         }
       };
       xhttp.open("POST", url);

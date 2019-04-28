@@ -118,7 +118,7 @@
                 <li class="list-group-item p-3">
                   <h3>Reviews</h3>
                   @auth
-                    @include('businesses/create-review')
+                    @include('reviews/create')
                   @else
                     Please <a href="/login">login</a> to leave a review
                   @endauth

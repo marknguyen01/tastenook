@@ -24,10 +24,16 @@ window.UserAction = class UserAction {
   }
   static sendRequest(el, url) {
     const xhttp = new XMLHttpRequest();
+    xhttp.responseType = 'json';
     xhttp.onreadystatechange = () => {
-      if(this.readyState == 4 && this.status == 200) {
+      if(xhttp.readyState == 4 && xhttp.status == 200) {
         const target = el.querySelector(".action__stats");
-        console.log(el)
+        const json = xhttp.response;
+        let count = parseInt(target.innerText);
+
+        console.log(count);
+        if(json.count_increased) target.innerHTML = count + 1;
+        else target.innerHTML = count - 1;
       }
     }
     xhttp.open("POST", url);

@@ -96,9 +96,12 @@ class ReviewController extends Controller
 
     if(!$user->hasUpVoted($review) && $review && $user) {
       $user->upVote($review);
+      return response()->json(['count_increased' => true], 200);
     }
-    else $user->cancelVote($review);
-    return response()->json(['status' => 'success'], 200);
+    else {
+        $user->cancelVote($review);
+        return response()->json(['count_increased' => false], 200);
+    }
   }
 
   public function downvote($id) {
@@ -107,8 +110,11 @@ class ReviewController extends Controller
 
     if(!$user->hasDownVoted($review) && $review && $user) {
       $user->downVote($review);
+      return response()->json(['count_increased' => true], 200);
     }
-    else $user->cancelVote($review);
-    return response()->json(['status' => 'success'], 200);
+    else {
+        $user->cancelVote($review);
+        return response()->json(['count_increased' => false], 200);
+    }
   }
 }
