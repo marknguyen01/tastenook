@@ -111,7 +111,7 @@ class ReviewController extends Controller
     $voted_user = $review->user();
     $user = \Auth::user();
 
-    if(!$user->hasUpVoted($review) && $review && $user) {
+    if(!$user->hasUpVoted($review) && $review) {
       $user->upVote($review);
       $voted_user->increment('tasties');
     }
@@ -132,7 +132,7 @@ class ReviewController extends Controller
     $voted_user = $review->user();
     $user = \Auth::user();
 
-    if(!$user->hasDownVoted($review) && $review && $user) {
+    if(!$user->hasDownVoted($review) && $review) {
       $user->downVote($review);
       $voted_user->decrement('tasties');
     }

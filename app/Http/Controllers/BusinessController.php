@@ -49,9 +49,54 @@ class BusinessController extends Controller
       }
     }
 
-    private function checkIfOnwer($business) {
-        return \Auth::user()->allowed('edit.businesses', $business);
+    public function create() {
+        return view('businesses/create');
     }
+
+    public function store(Request $req) {
+        $validatedData = $req->validate([
+          'street' => 'required',
+          'city' => 'required',
+          'state' => 'required|size:2',
+          'zip' => 'required|digits:5',
+          'phone' => 'required|digits:10',
+          'slug' => 'required|min:3,max:32',
+          'website' => 'nullable|url',
+        ]);
+        $street_address = $req->street;
+        $city = $req->city;
+        $state = $req->state;
+        $zip = $req->zip;
+        $address = format_address($street_address, $city, $state, $zip);
+        $place = file_get_contents('https://maps.googleapis.com/maps/api/place/textsearch/json?query=' . urlencode($address) . '&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=' . config("settings.googleMapsAPIKey"));
+        $place_json = json_decode($place);
+        $place_result = $place_json->results[0];
+
+        if($place_result) {
+            $business = Business::where('street_address', $street_address)->where('zip_code', $zip)->first();
+            if(!$business) {
+                $createdBusiness = Business::create([
+                    'name' => $req->name,
+                    'slug' => urlencode($req->slug),
+                    'street_address' => $street_address,
+                    'city' => $city,
+                    'state' => $state,
+                    'zip_code' => $zip,
+                    'phone_number' => $req->phone,
+                    'website' => $req->website,
+                    'lat' => $place_result->geometry->location->lat,
+                    'lng' => $place_result->geometry->location->lng,
+                ]);
+
+                if($createdBusiness->save())
+                    return \Redirect::back()->with('success', 'Business created!');
+                else return \Redirect::back()->with('error', 'Something went wrong!');
+            }
+            else return \Redirect::back()->with('error', 'There\'s already a business with this addresss');
+        }
+        else return \Redirect::back()->with('error', 'This is not a valid address');
+    }
+
     public function edit($slug) {
         $business = Business::where('slug', $slug)->first();
         if($this->checkIfOnwer($business))
@@ -66,7 +111,7 @@ class BusinessController extends Controller
                 try {
                     $updatedBusiness = $business->update([
                         'name' => $rq->name,
-                        'slug' => $rq->slug,
+                        'slug' => urlencode($rq->slug),
                         'street_address' => $rq->street,
                         'city' => $rq->city,
                         'state' => $rq->state,
@@ -94,5 +139,10 @@ class BusinessController extends Controller
 
     public function createCoupon() {
         return view('businesses/create-coupon');
+    }
+
+
+    private function checkIfOnwer($business) {
+        return \Auth::user()->allowed('edit.businesses', $business);
     }
 }

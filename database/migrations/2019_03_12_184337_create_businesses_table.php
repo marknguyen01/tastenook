@@ -25,12 +25,14 @@ class CreateBusinessesTable extends Migration
             $table->string('state', 2);
             $table->string('zip_code', 5);
             $table->string('phone_number', 10);
+            $table->string('website')->nullable();
 
-            $table->string('website');
+            // Verified status
+            $table->boolean('verifed')->default(false);
 
-            // Business Geopoint
-            $table->unsignedDecimal('lng')->default(0);
-            $table->unsignedDecimal('lat')->default(0);
+            // Business Geopoints
+            $table->decimal('lng', 10, 7)->default(0);
+            $table->decimal('lat', 10, 7)->default(0);
 
             $table->double('rating_avg', 2, 1)->default(0);
 

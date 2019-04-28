@@ -19,25 +19,7 @@ Route::get('/', 'WelcomeController@welcome')->name('welcome');
 // Authentication Routes
 Auth::routes();
 
-// Public Routes
-Route::group(['middleware' => ['web', 'activity']], function () {
 
-    // Activation Routes
-    Route::get('/activate', ['as' => 'activate', 'uses' => 'Auth\ActivateController@initial']);
-
-    Route::get('/activate/{token}', ['as' => 'authenticated.activate', 'uses' => 'Auth\ActivateController@activate']);
-    Route::get('/activation', ['as' => 'authenticated.activation-resend', 'uses' => 'Auth\ActivateController@resend']);
-    Route::get('/exceeded', ['as' => 'exceeded', 'uses' => 'Auth\ActivateController@exceeded']);
-
-    // Socialite Register Routes
-    Route::get('/social/redirect/{provider}', ['as' => 'social.redirect', 'uses' => 'Auth\SocialController@getSocialRedirect']);
-    Route::get('/social/handle/{provider}', ['as' => 'social.handle', 'uses' => 'Auth\SocialController@getSocialHandle']);
-
-    // Route to for user to reactivate their user deleted account.
-    Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
-
-    Route::get('/b/{slug}', ['as' => 'business.show', 'uses' => 'BusinessController@show']);
-});
 
 // Registered and Activated User Routes
 Route::group(['middleware' => ['auth', 'activated', 'activity']], function () {
@@ -74,6 +56,8 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
     });
 
     Route::group(['middleware' => ['level:3', 'permission:edit.businesses']], function() {
+        Route::get('/b/create', ['as' => 'business.create', 'uses' => 'BusinessController@create']);
+        Route::post('/b/create', ['as' => 'business.store', 'uses' => 'BusinessController@store']);
         Route::prefix('/b/{slug}')->group(function() {
           Route::get('/edit', ['as' => 'business.edit', 'uses' => 'BusinessController@edit']);
           Route::post('/update', ['as' => 'business.update', 'uses' => 'BusinessController@update']);
@@ -151,6 +135,24 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('active-users', 'AdminDetailsController@activeUsers');
 });
 
+// Public Routes
+Route::group(['middleware' => ['web', 'activity']], function () {
 
+    // Activation Routes
+    Route::get('/activate', ['as' => 'activate', 'uses' => 'Auth\ActivateController@initial']);
+
+    Route::get('/activate/{token}', ['as' => 'authenticated.activate', 'uses' => 'Auth\ActivateController@activate']);
+    Route::get('/activation', ['as' => 'authenticated.activation-resend', 'uses' => 'Auth\ActivateController@resend']);
+    Route::get('/exceeded', ['as' => 'exceeded', 'uses' => 'Auth\ActivateController@exceeded']);
+
+    // Socialite Register Routes
+    Route::get('/social/redirect/{provider}', ['as' => 'social.redirect', 'uses' => 'Auth\SocialController@getSocialRedirect']);
+    Route::get('/social/handle/{provider}', ['as' => 'social.handle', 'uses' => 'Auth\SocialController@getSocialHandle']);
+
+    // Route to for user to reactivate their user deleted account.
+    Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    Route::get('/b/{slug}/', ['as' => 'business.show', 'uses' => 'BusinessController@show']);
+});
 
 Route::redirect('/php', '/phpinfo', 301);
