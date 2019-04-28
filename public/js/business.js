@@ -66,11 +66,9 @@
 /******/ ({
 
 /***/ "./resources/assets/js/business.js":
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+__webpack_require__("./resources/assets/js/user-action.js");
 
 var map;
 
@@ -88,41 +86,47 @@ $('.form__rating input').change(function () {
   $radio.closest('label').addClass('selected');
 });
 
+/***/ }),
+
+/***/ "./resources/assets/js/user-action.js":
+/***/ (function(module, exports) {
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 window.UserAction = function () {
-  function UserAction() {
-    _classCallCheck(this, UserAction);
-  }
-
-  _createClass(UserAction, [{
-    key: 'init',
-    value: function init(el) {}
-  }], [{
-    key: 'token',
-    value: function token() {
-      return document.querySelector("meta[name=csrf-token]").getAttribute('content');
+    function UserAction() {
+        _classCallCheck(this, UserAction);
     }
-  }, {
-    key: 'sendRequest',
-    value: function sendRequest(el, url) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.responseType = 'json';
-      xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-          var target = el.querySelector(".action__stats");
-          var json = xhttp.response;
-          var count = parseInt(target.innerText);
 
-          console.log(count);
-          if (json.count_increased) target.innerHTML = count + 1;else target.innerHTML = count - 1;
+    _createClass(UserAction, null, [{
+        key: 'token',
+        value: function token() {
+            return document.querySelector("meta[name=csrf-token]").getAttribute('content');
         }
-      };
-      xhttp.open("POST", url);
-      xhttp.setRequestHeader("X-CSRF-TOKEN", this.token());
-      xhttp.send();
-    }
-  }]);
+    }, {
+        key: 'sendRequest',
+        value: function sendRequest(el, url) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.responseType = 'json';
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var target = el.querySelector(".action__stats");
+                    var json = xhttp.response;
+                    var count = parseInt(target.innerText);
 
-  return UserAction;
+                    console.log(count);
+                    if (json.count_increased) target.innerHTML = count + 1;else target.innerHTML = count - 1;
+                }
+            };
+            xhttp.open("POST", url);
+            xhttp.setRequestHeader("X-CSRF-TOKEN", this.token());
+            xhttp.send();
+        }
+    }]);
+
+    return UserAction;
 }();
 
 /***/ }),
