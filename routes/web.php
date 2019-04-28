@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
 
     Route::prefix('/review/{id}')->group(function() {
       Route::post('/upvote', ['as' => 'review.upvote', 'uses' => 'ReviewController@upvote']);
-      Route::post('/donwload', ['as' => 'review.downvote', 'uses' => 'ReviewController@downvote']);
+      Route::post('/downvote', ['as' => 'review.downvote', 'uses' => 'ReviewController@downvote']);
       Route::post('/comment', ['as' => 'review.comment', 'uses' => 'ReviewController@comment']);
     });
 

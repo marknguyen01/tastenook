@@ -17467,7 +17467,7 @@ a:hover {
 }
 
 .post__avatar img,
-.review__avatar img {
+.review__user__avatar img {
   width: 75px;
   height: 75px;
   border: 1px solid #7f8187;

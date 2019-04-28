@@ -60,7 +60,7 @@
 
         @include('partials.nav')
 
-        <main>
+        <main class="mb-3 mb-lg-5">
             @include('partials.form-status')
             @yield('content')
 

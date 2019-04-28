@@ -92,29 +92,43 @@ class ReviewController extends Controller
 
   public function upvote($id) {
     $review = Review::find($id);
+    $voted_user = $review->user();
     $user = \Auth::user();
 
     if(!$user->hasUpVoted($review) && $review && $user) {
       $user->upVote($review);
-      return response()->json(['count_increased' => true], 200);
+      $voted_user->increment('tasties');
     }
     else {
         $user->cancelVote($review);
-        return response()->json(['count_increased' => false], 200);
+        $voted_user->decrement('tasties');
     }
+    return response()->json([
+        'action' => 'vote',
+        'upvotes' => $review->countUpVoters(),
+        'downvotes' => $review->countDownVoters(),
+        'user_tasties' => $voted_user->first()->tasties,
+    ], 200);
   }
 
   public function downvote($id) {
     $review = Review::find($id);
+    $voted_user = $review->user();
     $user = \Auth::user();
 
     if(!$user->hasDownVoted($review) && $review && $user) {
       $user->downVote($review);
-      return response()->json(['count_increased' => true], 200);
+      $voted_user->decrement('tasties');
     }
     else {
         $user->cancelVote($review);
-        return response()->json(['count_increased' => false], 200);
+        $voted_user->increment('tasties');
     }
+    return response()->json([
+        'action' => 'vote',
+        'upvotes' => $review->countUpVoters(),
+        'downvotes' => $review->countDownVoters(),
+        'user_tasties' => $voted_user->first()->tasties,
+    ], 200);
   }
 }

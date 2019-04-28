@@ -126,19 +126,33 @@
                 @foreach ($reviews as $review)
                 <li class="list-group-item review">
                     <div class="row">
-                        <div class="col-md-4 col-lg-2 col-sm-12 review__avatar text-center">
-                            <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="d-block">
-                                <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="img-fluid rounded">
-                                <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] . '.' }}</h4>
-                            </a>
+                        <div class="review__user col-md-4 col-lg-2 col-sm-12 text-center">
+                            <div class="review__user__avatar">
+                                <a href="/profile/{{ $review->user->name }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="d-block">
+                                    <img src="{{ asset($review->user->profile->avatar ) }}" alt="{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] }}" class="img-fluid rounded">
+                                    <h4>{{ $review->user->first_name . ' ' . ($review->user->last_name)[0] . '.' }}</h4>
+                                </a>
+                            </div>
+                            <div class="review__user__stats">
+                                @if($review->user->tasties > 0)
+                                    <span class="badge  badge-success">
+                                @elseif($review->user->tasties < 0)
+                                    <span class="badge badge-danger">
+                                @else
+                                    <span class="badge badge-secondary">
+                                @endif
+                                    <span class="tasty_stat">{{ $review->user->tasties }}</span>
+                                    <span> tasties</span>
+                                </span>
+                            </div>
                         </div>
                         <div class="col-md-8 col-lg-10 col-sm-12">
                             <div class="review__rating rating">
                                 @include('partials/rating', ['rating' => $review->rating])
                             </div>
-                            <div class="reviews__date">{{ time_elapsed_string($review->created_at) }}</div>
-                            <div class="reviews__content">{{ $review->content }}</div>
-                            <div class="reviews__actions mt-2">
+                            <div class="review__date">{{ time_elapsed_string($review->created_at) }}</div>
+                            <div class="review__content">{{ $review->content }}</div>
+                            <div class="review__actions mt-2">
                                 @include('businesses/profile-actions', [
                                   'upvote_route' => route('review.upvote', $review->id),
                                   'upvote_count' => $review->countUpVoters(),

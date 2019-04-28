@@ -56,7 +56,13 @@ a {
 }
 
 .review {
-    &__avatar {
-        @extend .post__avatar;
+    &__user {
+        &__avatar {
+            @extend .post__avatar;
+        }
+    }
+    .action {
+        &__stats {
+        }
     }
 }

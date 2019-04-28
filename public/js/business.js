@@ -108,21 +108,35 @@ window.UserAction = function () {
     }, {
         key: 'sendRequest',
         value: function sendRequest(el, url) {
+            var _this = this;
+
             var xhttp = new XMLHttpRequest();
             xhttp.responseType = 'json';
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    var target = el.querySelector(".action__stats");
                     var json = xhttp.response;
-                    var count = parseInt(target.innerText);
-
-                    console.log(count);
-                    if (json.count_increased) target.innerHTML = count + 1;else target.innerHTML = count - 1;
+                    if (json.action == "vote") _this.updateVoteCount(el, json);
                 }
             };
             xhttp.open("POST", url);
             xhttp.setRequestHeader("X-CSRF-TOKEN", this.token());
             xhttp.send();
+        }
+    }, {
+        key: 'updateVoteCount',
+        value: function updateVoteCount(el, json) {
+            var profileActionEl = el.parentElement;
+            var upvoteEl = profileActionEl.querySelector('.upvote_stat');
+            var downvoteEl = profileActionEl.querySelector('.downvote_stat');
+            var tastyEl = profileActionEl.parentElement.parentElement.querySelector('.tasty_stat');
+
+            var upvoteCount = parseInt(json.upvotes);
+            var downvoteCount = parseInt(json.downvotes);
+            var tastyCount = parseInt(json.user_tasties);
+
+            upvoteEl.innerText = upvoteCount;
+            downvoteEl.innerText = downvoteCount;
+            tastyEl.innerText = tastyCount;
         }
     }]);
 
