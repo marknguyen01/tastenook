@@ -107,7 +107,6 @@
                               <div class="posts__date">Posted 4 days ago</div>
                             <div class="posts__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                             <div class="posts__actions mt-2">
-                                @include('businesses/profile-actions')
                             </div>
                         </div>
                     </div>
@@ -140,7 +139,13 @@
                             <div class="reviews__date">{{ time_elapsed_string($review->created_at) }}</div>
                             <div class="reviews__content">{{ $review->content }}</div>
                             <div class="reviews__actions mt-2">
-                                @include('businesses/profile-actions')
+                                @include('businesses/profile-actions', [
+                                  'upvote_route' => route('review.upvote', $review->id),
+                                  'upvote_count' => $review->countUpVoters(),
+                                  'downvote_route' => route('review.downvote', $review->id),
+                                  'downvote_count' => $review->countDownVoters(),
+                                  'comment_route' => route('review.comment', $review->id),
+                                ])
                             </div>
                         </div>
                     </div>

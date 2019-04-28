@@ -12,7 +12,7 @@ class Review extends Model
     use CanBeVoted;
     use SoftDeletes;
 
-    protected $vote = App\Models\User::class;
+    protected $vote = \App\Models\User::class;
     protected $guarded = ['id'];
 
 

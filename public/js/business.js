@@ -68,8 +68,12 @@
 /***/ "./resources/assets/js/business.js":
 /***/ (function(module, exports) {
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var map;
+
 window.initMap = function () {
   map = new google.maps.Map(document.getElementById('map'), {
     center: geopoints,
@@ -83,6 +87,40 @@ $('.form__rating input').change(function () {
   $('.form__rating .selected').removeClass('selected');
   $radio.closest('label').addClass('selected');
 });
+
+window.UserAction = function () {
+  function UserAction() {
+    _classCallCheck(this, UserAction);
+  }
+
+  _createClass(UserAction, [{
+    key: 'init',
+    value: function init(el) {}
+  }], [{
+    key: 'token',
+    value: function token() {
+      return document.querySelector("meta[name=csrf-token]").getAttribute('content');
+    }
+  }, {
+    key: 'sendRequest',
+    value: function sendRequest(el, url) {
+      var _this = this;
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (_this.readyState == 4 && _this.status == 200) {
+          var target = el.querySelector(".action__stats");
+          console.log(el);
+        }
+      };
+      xhttp.open("POST", url);
+      xhttp.setRequestHeader("X-CSRF-TOKEN", this.token());
+      xhttp.send();
+    }
+  }]);
+
+  return UserAction;
+}();
 
 /***/ }),
 

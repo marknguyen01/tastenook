@@ -89,4 +89,26 @@ class ReviewController extends Controller
       return \Redirect::back()->withErrors(['Something went wrong. Your review has not been deleted!']);
     }
   }
+
+  public function upvote($id) {
+    $review = Review::find($id);
+    $user = \Auth::user();
+
+    if(!$user->hasUpVoted($review) && $review && $user) {
+      $user->upVote($review);
+    }
+    else $user->cancelVote($review);
+    return response()->json(['status' => 'success'], 200);
+  }
+
+  public function downvote($id) {
+    $review = Review::find($id);
+    $user = \Auth::user();
+
+    if(!$user->hasDownVoted($review) && $review && $user) {
+      $user->downVote($review);
+    }
+    else $user->cancelVote($review);
+    return response()->json(['status' => 'success'], 200);
+  }
 }

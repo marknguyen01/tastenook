@@ -67,6 +67,12 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
       Route::post('/review/update', ['as' => 'review.update', 'uses' => 'ReviewController@update']);
     });
 
+    Route::prefix('/review/{id}')->group(function() {
+      Route::post('/upvote', ['as' => 'review.upvote', 'uses' => 'ReviewController@upvote']);
+      Route::post('/donwload', ['as' => 'review.downvote', 'uses' => 'ReviewController@downvote']);
+      Route::post('/comment', ['as' => 'review.comment', 'uses' => 'ReviewController@comment']);
+    });
+
     Route::group(['middleware' => ['level:3', 'permission:edit.businesses']], function() {
         Route::prefix('/b/{slug}')->group(function() {
           Route::get('/edit', ['as' => 'business.edit', 'uses' => 'BusinessController@edit']);
