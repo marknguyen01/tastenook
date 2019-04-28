@@ -30,11 +30,15 @@
                 </div>
                 <div class="btn-group profile__action" role="group" aria-label="Basic example">
                 @auth
-                  @allowed('review.businesses', $user_review)
-                    <a href="#reviews__form" class="btn btn-danger py-2">Edit your review</a>
+                  @if($user_review)
+                      @allowed('review.businesses', $user_review)
+                        <a href="#reviews__form" class="btn btn-danger py-2">Edit your review</a>
+                      @else
+                        <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a>
+                      @endallowed
                   @else
-                    <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a>
-                  @endallowed
+                      <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a> 
+                  @endif
                   <button type="button" class="btn btn-outline-secondary">Follow</button>
                   <button type="button" class="btn btn-outline-secondary">Message</button>
                 @else

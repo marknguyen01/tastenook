@@ -23,4 +23,8 @@ class Review extends Model
     public function comments() {
       return $this->morphMany('App\Models\Comment', 'commentable');
     }
+
+    public function business() {
+        return $this->belongsTo('App\Models\Business', 'business_id');
+    }
 }

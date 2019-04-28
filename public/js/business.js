@@ -159,7 +159,7 @@ window.UserAction = function () {
 
                 var submitButton = document.createElement('button');
                 submitButton.type = 'submit';
-                submitButton.setAttribute('class', 'btn btn-primary');
+                submitButton.setAttribute('class', 'btn btn-dark');
                 submitButton.innerText = 'Submit';
 
                 form.appendChild(textarea);
