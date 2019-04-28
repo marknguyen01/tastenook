@@ -51,3 +51,7 @@ function address_to_geo($address) {
 function format_address($street, $city, $state, $zip) {
   return $street . ' ' . $city . ', '. $state . ' ' . $zip;
 }
+
+function censor_name($first_name, $last_name) {
+    return $first_name . ' ' . $last_name[0];
+}

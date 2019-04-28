@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use jeremykenedy\LaravelRoles\Models\Permission;
 use App\Models\Review;
 use App\Models\Business;
+use App\Models\Comment;
 
 class ReviewController extends Controller
 {
@@ -34,6 +35,9 @@ class ReviewController extends Controller
 
         if(!$review->save()) {
           return \Redirect::back()->withErrors(['Something went wrong. Your review has not been saved']);
+        }
+        else {
+            return \Redirect::back()->with(['Your review has been created!']);
         }
       }
       else {
@@ -130,5 +134,24 @@ class ReviewController extends Controller
         'downvotes' => $review->countDownVoters(),
         'user_tasties' => $voted_user->first()->tasties,
     ], 200);
+  }
+
+  public function storeComment(Request $request, $id) {
+      $validatedData = $request->validate([
+        'content' => 'required',
+      ]);
+      $review = Review::find($id);
+      if($review) {
+          $createdReview = $review->comments()->create([
+                  'user_id' => \Auth::user()->id,
+                  'content' => $request->content,
+          ]);
+          if($createdReview->save()) {
+              return \Redirect::back()->with(['Your comment has been created!']);
+          }
+          else {
+              return \Redirect::back()->withError(['Something went wrong. Your comment has not been created!']);
+          }
+      }
   }
 }

@@ -138,6 +138,37 @@ window.UserAction = function () {
             downvoteEl.innerText = downvoteCount;
             tastyEl.innerText = tastyCount;
         }
+    }, {
+        key: 'createCommentForm',
+        value: function createCommentForm(el, action) {
+            if (!el.parentElement.querySelector('.comment__form')) {
+
+                var form = document.createElement("form");
+                form.method = 'post';
+                form.action = action;
+                form.setAttribute('class', 'mt-1 mt-lg-3 comment__form');
+
+                var tokenInput = document.createElement('input');
+                tokenInput.value = this.token();
+                tokenInput.type = 'hidden';
+                tokenInput.name = '_token';
+
+                var textarea = document.createElement('textarea');
+                textarea.name = 'content';
+                textarea.setAttribute('class', 'form-control my-2');
+
+                var submitButton = document.createElement('button');
+                submitButton.type = 'submit';
+                submitButton.setAttribute('class', 'btn btn-primary');
+                submitButton.innerText = 'Submit';
+
+                form.appendChild(textarea);
+                form.appendChild(tokenInput);
+                form.appendChild(submitButton);
+
+                el.parentElement.appendChild(form);
+            }
+        }
     }]);
 
     return UserAction;

@@ -88,8 +88,8 @@
         </div>
         @allowed('edit.businesses', $business)
         <div class="profile__admin my-3">
-          <a href="/b/{{ $business->slug }}/edit" class="btn btn-outline-success">Manage your business</a>
-          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-outline-success">Manage coupons</a>
+          <a href="/b/{{ $business->slug }}/edit" class="btn btn-info">Manage your business</a>
+          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-info">Manage coupons</a>
         </div>
         @endallowed
         <div class="profile__posts">
@@ -104,9 +104,9 @@
                             </a>
                         </div>
                         <div class="col-md-8 col-lg-10 col-sm-12">
-                              <div class="posts__date">Posted 4 days ago</div>
-                            <div class="posts__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                            <div class="posts__actions mt-2">
+                             <div class="post__date">Posted 4 days ago</div>
+                            <div class="post__content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                            <div class="post__actions mt-2">
                             </div>
                         </div>
                     </div>
@@ -134,24 +134,17 @@
                                 </a>
                             </div>
                             <div class="review__user__stats">
-                                @if($review->user->tasties > 0)
-                                    <span class="badge  badge-success">
-                                @elseif($review->user->tasties < 0)
-                                    <span class="badge badge-danger">
-                                @else
-                                    <span class="badge badge-secondary">
-                                @endif
-                                    <span class="tasty_stat">{{ $review->user->tasties }}</span>
-                                    <span> tasties</span>
-                                </span>
+                                @include('partials/tasties', [
+                                    'tasties' => $review->user->tasties
+                                ])
                             </div>
                         </div>
                         <div class="col-md-8 col-lg-10 col-sm-12">
                             <div class="review__rating rating">
                                 @include('partials/rating', ['rating' => $review->rating])
                             </div>
-                            <div class="review__date">{{ time_elapsed_string($review->created_at) }}</div>
-                            <div class="review__content">{{ $review->content }}</div>
+                            <small class="review__date">{{ time_elapsed_string($review->created_at) }}</small>
+                            <div class="review__content my-2">{{ $review->content }}</div>
                             <div class="review__actions mt-2">
                                 @include('businesses/profile-actions', [
                                   'upvote_route' => route('review.upvote', $review->id),
@@ -159,8 +152,30 @@
                                   'downvote_route' => route('review.downvote', $review->id),
                                   'downvote_count' => $review->countDownVoters(),
                                   'comment_route' => route('review.comment', $review->id),
+                                  'comment_count' => $review->comments->count(),
                                 ])
                             </div>
+                        </div>
+                        <div class="col-md-8 col-lg-10 col-sm-12 offset-lg-2 offset-md-4 mt-2 mt-lg-4">
+                            <ul class="list-group review__comments">
+                                @foreach($review->comments as $comment)
+                                    <li class="comment list-group-item">
+                                        <div class="comment__author">
+                                            <a href="/profile/{{ $comment->user->name }}"
+                                                alt="{{ censor_name($comment->user->first_name, $comment->user->last_name) }}">
+                                                {{ censor_name($comment->user->first_name, $comment->user->last_name) }}
+                                            </a>
+                                            @include('partials/tasties', [
+                                                'tasties' => $comment->user->tasties,
+                                            ])
+                                            <small>{{ time_elapsed_string($comment->created_at) }}</small>
+                                        </div>
+                                        <div class="comment__content my-1">
+                                            {{ $comment->content }}
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </li>

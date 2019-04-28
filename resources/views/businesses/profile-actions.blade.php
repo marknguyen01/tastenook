@@ -9,10 +9,12 @@ onclick="UserAction.sendRequest(this, '{{ $downvote_route }}')">
   <span class="d-none d-md-inline">(<span class="downvote_stat">{{ isset($downvote_count) ? $downvote_count : 0 }}</span>) DISIKE
 </span>
 </button>
+@if(isset($comment_route))
 <button class="btn btn-outline-secondary action"
-onclick="UserAction.sendRequest(this, '{{ $comment_route }}')">
+onclick="UserAction.createCommentForm(this, '{{ $comment_route }}')">
   <i class="fas fa-comment"></i>
   <span class="d-none d-md-inline">
     (<span class="comment_stat">{{ isset($comment_count) ? $comment_count : 0 }}</span>) COMMENT
   </span>
 </button>
+@endif

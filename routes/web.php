@@ -70,7 +70,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
     Route::prefix('/review/{id}')->group(function() {
       Route::post('/upvote', ['as' => 'review.upvote', 'uses' => 'ReviewController@upvote']);
       Route::post('/downvote', ['as' => 'review.downvote', 'uses' => 'ReviewController@downvote']);
-      Route::post('/comment', ['as' => 'review.comment', 'uses' => 'ReviewController@comment']);
+      Route::post('/comment', ['as' => 'review.comment', 'uses' => 'ReviewController@storeComment']);
     });
 
     Route::group(['middleware' => ['level:3', 'permission:edit.businesses']], function() {
