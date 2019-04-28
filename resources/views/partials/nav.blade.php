@@ -20,8 +20,8 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="user-avatar-nav">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" class="user-avatar-nav">
+                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
