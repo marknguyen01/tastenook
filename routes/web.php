@@ -55,6 +55,12 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
       Route::post('/comment', ['as' => 'review.comment', 'uses' => 'ReviewController@storeComment']);
     });
 
+    Route::prefix('/post/{id}')->group(function() {
+      Route::post('/upvote', ['as' => 'post.upvote', 'uses' => 'PostController@upvote']);
+      Route::post('/downvote', ['as' => 'post.downvote', 'uses' => 'PostController@downvote']);
+      Route::post('/comment', ['as' => 'post.comment', 'uses' => 'PostController@storeComment']);
+    });
+
     Route::group(['middleware' => ['level:3', 'permission:edit.businesses']], function() {
         Route::get('/b/create', ['as' => 'business.create', 'uses' => 'BusinessController@create']);
         Route::post('/b/create', ['as' => 'business.store', 'uses' => 'BusinessController@store']);
@@ -67,6 +73,12 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
           Route::get('/coupon/{coupon_id}/edit', ['as' => 'coupon.edit', 'uses' => 'BusinessController@editCoupon']);
           Route::post('/coupon/{coupon_id}/update', ['as' => 'coupon.update', 'uses' => 'BusinessController@updateCoupon']);
           Route::get('/coupon/{coupon_id}/delete', ['as' => 'coupon.delete', 'uses' => 'BusinessController@deleteCoupon']);
+          Route::get('/post', ['as' => 'post.show', 'uses' => 'PostController@show']);
+          Route::get('/post/create', ['as' => 'post.create', 'uses' => 'PostController@create']);
+          Route::post('/post/store', ['as' => 'post.store', 'uses' => 'PostController@store']);
+          Route::get('/post/{post_id}/edit', ['as' => 'post.edit', 'uses' => 'PostController@edit']);
+          Route::post('/post/{post_id}/update', ['as' => 'post.update', 'uses' => 'PostController@update']);
+          Route::get('/post/{post_id}/destroy', ['as' => 'post.destroy', 'uses' => 'PostController@destroy']);
         });
     });
 });
@@ -157,6 +169,8 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
 
     Route::get('/b/{slug}/', ['as' => 'business.show', 'uses' => 'BusinessController@show']);
+    Route::get('/b/search', ['as' => 'business.search', 'uses' => 'BusinessController@search']);
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);

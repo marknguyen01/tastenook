@@ -39,6 +39,8 @@ class CreateBusinessesTable extends Migration
             // Stats
             $table->integer('view_count')->default(0);
             $table->integer('review_count')->default(0);
+            $table->integer('tasties')->default(0);
+
 
 
             $table->timestamps();

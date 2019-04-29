@@ -21,4 +21,8 @@ class Business extends Model
     public function coupons() {
         return $this->hasMany('App\Models\Coupon');
     }
+
+    public function posts() {
+        return $this->hasMany('App\Models\Post');
+    }
 }

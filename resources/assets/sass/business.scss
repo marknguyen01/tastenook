@@ -47,18 +47,14 @@ a {
     }
 }
 
-.post__avatar {
-    img {
-        width: 75px;
-        height: 75px;
-        border: 1px solid $text-accent-color;
-    }
-}
-
-.review {
+.review, .post {
     &__user {
         &__avatar {
-            @extend .post__avatar;
+            img {
+                width: 75px;
+                height: 75px;
+                border: 1px solid $text-accent-color;
+            }
         }
     }
     .action {

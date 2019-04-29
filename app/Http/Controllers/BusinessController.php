@@ -136,6 +136,10 @@ class BusinessController extends Controller
             }
         }
     }
+
+    public function search(Request $req) {
+        
+    }
     private function validateCoupon($req) {
         $validatedData = $req->validate([
           'name' => 'required',
@@ -197,8 +201,6 @@ class BusinessController extends Controller
         return view('businesses/create-coupon', ['coupon' => $coupon]);
     }
 
-
-
     public function deleteCoupon($slug, $id) {
         $user = \Auth::user();
         $business = Business::where('slug', $slug)->first();
@@ -207,7 +209,6 @@ class BusinessController extends Controller
             if($deletedCoupon) return redirect(route('coupon.show', $slug));
         }
     }
-
 
     private function checkIfOnwer($business) {
         return \Auth::user()->allowed('edit.businesses', $business);
