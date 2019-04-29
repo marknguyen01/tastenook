@@ -42,10 +42,22 @@ function generate_slug($string = '') {
 function address_to_geo($address) {
   $geocode= file_get_contents('https://maps.google.com/maps/api/geocode/json?key=' . config("settings.googleMapsAPIKey") . '&address='. urlencode($address) . '&sensor=false');
   $output= json_decode($geocode);
-  return [
-    'lat' => $output->results[0]->geometry->location->lat,
-    'lng' => $output->results[0]->geometry->location->lng,
-  ];
+  if(count($output->results) != 0) {
+      return [
+      'lat' => $output->results[0]->geometry->location->lat,
+      'lng' => $output->results[0]->geometry->location->lng,
+      ];
+  }
+  else return null;
+}
+
+function address_to_json($address) {
+    $result = file_get_contents('https://maps.google.com/maps/api/geocode/json?key=' . config("settings.googleMapsAPIKey") . '&address='. urlencode($address) . '&sensor=false');
+    $output = json_decode($result);
+    if(count($output->results) != 0) {
+        return $output->results[0];
+    }
+    else return null;
 }
 
 function format_address($street, $city, $state, $zip) {

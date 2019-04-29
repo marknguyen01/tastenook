@@ -1,10 +1,8 @@
 @import "colors";
 @import "variables";
-
 body {
     background-color: $indigo;
 }
-
 #intro {
     width: 100%;
     height: 55vh;
@@ -53,37 +51,6 @@ body {
                         background-color: $white;
                         border-radius: 50%;
                     }
-                }
-            }
-        }
-    }
-}
-
-
-.businesses {
-    .business-heading {
-        color: $white;
-    }
-    .business {
-        background-color: $white;
-        border-radius: 3px;
-
-        .business-img img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .business-info {
-            a {
-                color: $text-primary-color;
-                text-decoration: none;
-            }
-            .business-status {
-                color: $green;
-            }
-            .business-stats {
-                .view-count, .review-count, .comment-count {
-                    color: $text-accent-color;
                 }
             }
         }

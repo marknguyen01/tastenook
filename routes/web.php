@@ -169,7 +169,7 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
 
     Route::get('/b/{slug}/', ['as' => 'business.show', 'uses' => 'BusinessController@show']);
-    Route::get('/b/search', ['as' => 'business.search', 'uses' => 'BusinessController@search']);
+    Route::post('/b/search', ['as' => 'business.search', 'uses' => 'BusinessController@search']);
 
 });
 

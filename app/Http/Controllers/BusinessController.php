@@ -138,7 +138,32 @@ class BusinessController extends Controller
     }
 
     public function search(Request $req) {
-        
+        $validatedData = $req->validate([
+            'location' => 'required',
+        ]);
+        $result = address_to_json($req->location);
+
+        if($result != null) {
+            $city = $state = "";
+            foreach($result->address_components as $ad) {
+                if($ad->types[0] == "locality")
+                $city = $ad->long_name;
+                if($ad->types[0] == "administrative_area_level_1")
+                $state = $ad->short_name;
+            }
+            $businesses = Business::where('city', $city)->where('state', $state)->paginate(12);
+            if($req->name != "") {
+                $businesses->where('name', $req->name)->paginate(12);
+            }
+
+            return view('businesses/search', [
+                'businesses' => $businesses, 'city' => $city,
+                'state' => $state,
+                'search_location' => $req->location,
+                'search_name' => $req->name,
+            ]);
+        }
+        else return redirect('/')->with('error', 'This is not a valid location');
     }
     private function validateCoupon($req) {
         $validatedData = $req->validate([

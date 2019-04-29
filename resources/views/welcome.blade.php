@@ -49,7 +49,7 @@
 </head>
 <body>
     <div id="app">
-
+@include('partials/form-status')
     <header id="intro">
         <div class="container">
             <div class="row">

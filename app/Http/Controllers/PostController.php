@@ -93,9 +93,18 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($slug, $post_id)
     {
-        $post->delete();
+        $business = Business::where('slug', $slug)->first();
+        $post = Post::find($post_id);
+        $user = \Auth::user();
+        if($business && $post && $user->allowed('edit.businesses', $business)) {
+            if($post->delete()) {
+                return redirect(route('business.show', $slug))->with('success', 'Your post has been deleted');
+            }
+            else return redirect(route('business.show', $slug))->with('error', 'Something went wrong! Your post has not been deleted');
+        }
+        else return redirect(route('business.show', $slug))->with('error', 'Unauthorized');
     }
 
 
