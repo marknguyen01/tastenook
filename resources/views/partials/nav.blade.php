@@ -20,7 +20,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" class="user-avatar-nav">
+                            <img src="{{ isset(Auth::user()->profile->avatar) ? Auth::user()->profile->avatar : asset('images/default_user.svg') }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}" class="user-avatar-nav">
                             {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

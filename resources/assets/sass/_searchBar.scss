@@ -1,5 +1,6 @@
 .search-bar {
     min-width: 40vw;
+    width: inherit;
     input.form-control {
         border: 1px solid lighten($text-color, 20%);
 

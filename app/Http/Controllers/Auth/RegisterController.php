@@ -74,7 +74,6 @@ class RegisterController extends Controller
                 'captcha'               => 'required|min:1',
             ],
             [
-                'name.unique'                   => trans('auth.userNameTaken'),
                 'first_name.required'           => trans('auth.fNameRequired'),
                 'last_name.required'            => trans('auth.lNameRequired'),
                 'email.required'                => trans('auth.emailRequired'),
@@ -101,9 +100,7 @@ class RegisterController extends Controller
         $role = Role::where('slug', '=', 'unverified')->first();
 
         $user = User::create([
-                'name'              => strtolower(
-                  generate_slug($data['first_name'] . ($data['last_name'])[0])
-                ),
+                'name'              => generate_slug($data['first_name'] . $data['last_name'][0]),
                 'first_name'        => $data['first_name'],
                 'last_name'         => $data['last_name'],
                 'email'             => $data['email'],

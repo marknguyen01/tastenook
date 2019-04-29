@@ -17379,6 +17379,7 @@ div[data-toggle="buttons"] label.active {
 
 .search-bar {
   min-width: 40vw;
+  width: inherit;
 }
 
 .search-bar input.form-control {

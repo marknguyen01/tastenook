@@ -67,7 +67,7 @@
                         @else
                             <div class="nav-item dropdown ml-auto">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->firstName . ' ' . Auth::user()->lastName }}">
+                                    <img src="{{ isset(Auth::user()->profile->avatar) ? Auth::user()->profile->avatar : asset('images/default_user.svg') }}" alt="{{ Auth::user()->firstName . ' ' . Auth::user()->lastName }}">
                                     <span>{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</span> <span class="caret"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

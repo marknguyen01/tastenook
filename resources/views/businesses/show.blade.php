@@ -37,7 +37,7 @@
                         <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a>
                       @endallowed
                   @else
-                      <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a> 
+                      <a href="#reviews__form" class="btn btn-danger py-2">Leave your review</a>
                   @endif
                   <button type="button" class="btn btn-outline-secondary">Follow</button>
                   <button type="button" class="btn btn-outline-secondary">Message</button>
@@ -73,14 +73,16 @@
                     <div class="col-12 mt-3">
                         <ul class="list-group">
                           @foreach($coupons as $coupon)
-                          <li class="list-group-item">
-                              <p>
+                          <li class="list-group-item coupon">
+                              <div class="coupon__name">
                                   {{ $coupon->name }}
                                    <span class="badge badge-danger badge-pill">expires in {{ time_left_string($coupon->expired_at) }}</span>
-                               </p>
-                              <p><strong>{{ $coupon->code }}</strong></p>
+                               </div>
+                              <div class="coupon__code"><strong>{{ $coupon->code }}</strong></div>
                               @if($coupon->description)
-                                  <p><small>*{{ $coupon->description }}</small></p>
+                                  <div class="coupon__desc">
+                                      <small>*{{ $coupon->description }}</small>
+                                  </div>
                               @endif
                           </li>
                           @endforeach
