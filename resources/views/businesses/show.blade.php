@@ -25,6 +25,17 @@
                 <div class="profile__title ">
                     <h1>{{ $business->name }}</h1>
                 </div>
+                <div class="profile__status">
+                    @allowed('edit.businesses', $business)
+                    <span class="badge badge-dark h1">Owner access</span>
+                    @endallowed
+                    @if(intval(time_left_string($business->created_at)) <= 7)
+                        <span class="badge badge-success">New</span>
+                    @endif
+                    @if($business->view_count > 10)
+                        <span class="badge badge-danger">Hot</span>
+                    @endif
+                </div>
                 <div class="profile__rating rating">
                     @include('partials/rating', ['rating' => $business->rating_avg])
                 </div>
@@ -95,7 +106,7 @@
         @allowed('edit.businesses', $business)
         <div class="profile__admin my-3">
           <a href="/b/{{ $business->slug }}/edit" class="btn btn-info">Manage your business</a>
-          <a href="/b/{{ $business->slug}}/coupon/create" class="btn btn-info">Manage coupons</a>
+          <a href="/b/{{ $business->slug}}/coupon" class="btn btn-info">Manage coupons</a>
         </div>
         @endallowed
         <div class="profile__posts">

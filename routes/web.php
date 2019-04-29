@@ -61,8 +61,12 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
         Route::prefix('/b/{slug}')->group(function() {
           Route::get('/edit', ['as' => 'business.edit', 'uses' => 'BusinessController@edit']);
           Route::post('/update', ['as' => 'business.update', 'uses' => 'BusinessController@update']);
+          Route::get('/coupon', ['as' => 'coupon.show', 'uses' => 'BusinessController@showCoupon']);
           Route::get('/coupon/create', ['as' => 'coupon.create', 'uses' => 'BusinessController@createCoupon']);
-          Route::post('/coupon/update', ['as' => 'coupon.update', 'uses' => 'BusinessController@updateCoupon']);
+          Route::post('/coupon/store', ['as' => 'coupon.store', 'uses' => 'BusinessController@storeCoupon']);
+          Route::get('/coupon/{coupon_id}/edit', ['as' => 'coupon.edit', 'uses' => 'BusinessController@editCoupon']);
+          Route::post('/coupon/{coupon_id}/update', ['as' => 'coupon.update', 'uses' => 'BusinessController@updateCoupon']);
+          Route::get('/coupon/{coupon_id}/delete', ['as' => 'coupon.delete', 'uses' => 'BusinessController@deleteCoupon']);
         });
     });
 });

@@ -136,9 +136,76 @@ class BusinessController extends Controller
             }
         }
     }
+    private function validateCoupon($req) {
+        $validatedData = $req->validate([
+          'name' => 'required',
+          'code' => 'required',
+          'expired_at' => 'required|date',
+          'description' => 'max:255'
+        ]);
+    }
+    public function showCoupon($slug) {
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        if($business && $user->allowed('edit.businesses', $business)) return view('businesses/show-coupon', ['business' => $business]);
+    }
+    public function createCoupon($slug) {
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        if($business && $user->allowed('edit.businesses', $business))
+        return view('businesses/create-coupon', ['business' => $business]);
+    }
+    public function storeCoupon(Request $req, $slug) {
+        $this->validateCoupon($req);
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        if($user->allowed('edit.businesses', $business)) {
+            $createdCoupon = $business->coupons()->create([
+                'name' => $req->name,
+                'code' => $req->code,
+                'expired_at' => $req->expired_at,
+                'description' => $req->description,
+                'user_id' => $user->id,
+            ]);
 
-    public function createCoupon() {
-        return view('businesses/create-coupon');
+            if($createdCoupon) return redirect(route('coupon.show', $slug));
+        }
+        return view('businesses/create-coupon', ['coupon' => $coupon]);
+    }
+    public function editCoupon($slug, $id) {
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        $coupon = Coupon::find($id)->first();
+        if($coupon && $user->allowed('edit.businesses', $business))
+        return view('businesses/create-coupon', ['coupon' => $coupon]);
+    }
+    public function updateCoupon(Request $req, $slug, $id) {
+        $this->validateCoupon($req);
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        $coupon = Coupon::find($id)->first();
+        if($coupon && $user->allowed('edit.businesses', $business)) {
+            $updatedCoupon = $coupon->update([
+                'name' => $req->name,
+                'code' => $req->code,
+                'expired_at' => $req->expired_at,
+                'description' => $req->description,
+            ]);
+
+            if($updatedCoupon) return redirect(route('coupon.show', $slug));
+        }
+        return view('businesses/create-coupon', ['coupon' => $coupon]);
+    }
+
+
+
+    public function deleteCoupon($slug, $id) {
+        $user = \Auth::user();
+        $business = Business::where('slug', $slug)->first();
+        if($user->allowed('edit.businesses', $business)) {
+            $deletedCoupon = Coupon::find($id)->delete();
+            if($deletedCoupon) return redirect(route('coupon.show', $slug));
+        }
     }
 
 
