@@ -138,10 +138,12 @@
                         <div class="col-md-8 col-lg-10 col-sm-12">
                             <div class="post__header">
                                 <small class="post__date">{{ time_elapsed_string($post->created_at) }}</small>
-                                @include('posts/actions', [
-                                    'destroy_route' => route('post.destroy', [$business->slug, $post]),
-                                    'edit_route' => route('post.edit', [$business->slug, $post])
-                                ])
+                                @allowed('edit.businesses', $business)
+                                    @include('posts/actions', [
+                                        'destroy_route' => route('post.destroy', [$business->slug, $post]),
+                                        'edit_route' => route('post.edit', [$business->slug, $post])
+                                    ])
+                                @endallowed
                             </div>
                             <div class="post__content my-2">{{ $post->content }}</div>
                             <div class="post__actions mt-2">
